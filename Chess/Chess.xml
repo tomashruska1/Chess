@@ -1,0 +1,1028 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Chess</name>
+    </assembly>
+    <members>
+        <member name="T:Chess.AfterEndOfGameGUI">
+            <summary>
+            Provides a means of selecting an action after the end of each game.
+            </summary>
+        </member>
+        <member name="M:Chess.AfterEndOfGameGUI.#ctor(System.String)">
+            <summary>
+            Creates an instance of <see cref="T:Chess.AfterEndOfGameGUI"/>
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="F:Chess.AfterEndOfGameGUI.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Chess.AfterEndOfGameGUI.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Chess.AfterEndOfGameGUI.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Chess.AfterEndOfGameAction">
+            <summary>
+            Used with <see cref="T:Chess.AfterEndOfGameGUI"/>
+            </summary>
+        </member>
+        <member name="F:Chess.AfterEndOfGameAction.NewGame">
+            <summary>
+            Indicates the user has chosen to play a new game.
+            </summary>
+        </member>
+        <member name="F:Chess.AfterEndOfGameAction.ExportMoves">
+            <summary>
+            Indicates the user wishes to export the moves to a text file.
+            </summary>
+        </member>
+        <member name="F:Chess.AfterEndOfGameAction.None">
+            <summary>
+            Indicates the user has not yet selected what to do next.
+            </summary>
+        </member>
+        <member name="T:Chess.Board.IBoard">
+            <summary>
+            Interface that specifies the methods a board class needs to implement.
+            </summary>
+        </member>
+        <member name="P:Chess.Board.IBoard.Moves">
+            <summary>
+            Keeps a reference for all the moves made during the game, may export the data to a text file as standard notation.
+            </summary>
+        </member>
+        <member name="P:Chess.Board.IBoard.LivePieces">
+            <summary>
+            Keeps a reference for all the pieces on the board by color.
+            </summary>
+        </member>
+        <member name="P:Chess.Board.IBoard.Kings">
+            <summary>
+            Keeps a reference for both kings on the board by color.
+            </summary>
+        </member>
+        <member name="P:Chess.Board.IBoard.LineOfAttack">
+            <summary>
+            Keeps a reference for all pieces attacking the king of the opposite color and the paths they attack the king on.
+            </summary>
+        </member>
+        <member name="P:Chess.Board.IBoard.NextMove">
+            <summary>
+            Represents the color that is currently on the move.
+            </summary>
+        </member>
+        <member name="M:Chess.Board.IBoard.EvaluateMove(Chess.MoveType)">
+            <summary>
+            Evaluates whether the move has ended the game and how - checkmate or draw.
+            </summary>
+            <param name="type"></param>
+            <returns>Returns the type of move - a bit flag enum.</returns>
+        </member>
+        <member name="M:Chess.Board.IBoard.LegalMovesForPiece(Chess.Pieces.Piece)">
+            <summary>
+            Calculates all the legal moves for a given piece.
+            </summary>
+            <param name="piece"></param>
+            <returns>A list of all possible moves as tuples (row, column).</returns>
+        </member>
+        <member name="M:Chess.Board.IBoard.LegalMovesForPiece(System.Int32,System.Int32)">
+            <summary>
+            Calculates all the legal moves for the piece on the given coordinates.
+            </summary>
+            <param name="row"></param>
+            <param name="column"></param>
+            <returns>A list of all possible moves as tuples (row, column).</returns>
+        </member>
+        <member name="M:Chess.Board.IBoard.IsProtectingKing(Chess.Pieces.Piece)">
+            <summary>
+            Checks if the given piece is protecting its king.
+            </summary>
+            <param name="piece"></param>
+            <returns>True if the piece is protecting its king, otherwise false/.</returns>
+        </member>
+        <member name="M:Chess.Board.IBoard.IsProtectingKing(Chess.Pieces.Piece,System.Int32,System.Int32)">
+            <summary>
+            Checks if the given piece is protecting its king.
+            </summary>
+            <param name="piece"></param>
+            <param name="row"></param>
+            <param name="column"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Board.IBoard.MovePiece(Chess.Pieces.Piece,System.Int32,System.Int32)">
+            <summary>
+            Moves the piece on the board, removes the piece of opposing color if it is on the square and calls <see cref="M:Chess.Board.IBoard.EvaluateMove(Chess.MoveType)"/>
+            </summary>
+            <param name="piece"></param>
+            <param name="row"></param>
+            <param name="column"></param>
+        </member>
+        <member name="P:Chess.Board.IBoard.Item(System.Int32,System.Int32)">
+            <summary>
+            Provides a readonly access to the item on the given coordinates (row, column).
+            </summary>
+            <param name="row"></param>
+            <param name="column"></param>
+            <returns>The piece on the given coordinates.</returns>
+        </member>
+        <member name="T:Chess.Board.WinFormsBoard">
+            <summary>
+            Implements the <see cref="T:Chess.Board.IBoard"/> interface, is used with a Windows Forms GUI.
+            </summary>
+        </member>
+        <member name="P:Chess.Board.WinFormsBoard.Board">
+            <summary>
+            An array holding the pieces on the chessboard.
+            </summary>
+        </member>
+        <member name="P:Chess.Board.WinFormsBoard.Moves">
+            <summary>
+            Represents all the moves made during the game, may export the data to a text file as standard notation.
+            </summary>
+        </member>
+        <member name="P:Chess.Board.WinFormsBoard.Grid">
+            <summary>
+            Represents the <see cref="T:System.Windows.Forms.DataGridView"/> that is used t display the chessboard.
+            </summary>
+        </member>
+        <member name="P:Chess.Board.WinFormsBoard.Form">
+            <summary>
+            Represents the Form implementing the GUI, is used to access the GUI methods.
+            </summary>
+        </member>
+        <member name="P:Chess.Board.WinFormsBoard.LivePieces">
+            <summary>
+            Represents all the pieces on the board by color.
+            </summary>
+        </member>
+        <member name="P:Chess.Board.WinFormsBoard.Kings">
+            <summary>
+            Represents both kings on the board by color.
+            </summary>
+        </member>
+        <member name="P:Chess.Board.WinFormsBoard.LineOfAttack">
+            <summary>
+            Represents all pieces attacking the king of the opposite color and the paths they attack the king on.
+            </summary>
+        </member>
+        <member name="P:Chess.Board.WinFormsBoard.NextMove">
+            <summary>
+            Represents the color that is currently on the move.
+            </summary>
+        </member>
+        <member name="M:Chess.Board.WinFormsBoard.#ctor(System.Windows.Forms.DataGridView,Chess.Chess)">
+            <summary>
+            Represents the <see cref="T:System.Windows.Forms.DataGridView"/> object displaying the chessboard.
+            </summary>
+            <param name="dataGridView"></param>
+            <param name="form"></param>
+        </member>
+        <member name="M:Chess.Board.WinFormsBoard.EvaluateMove(Chess.MoveType)">
+            <summary>
+            Evaluates whether the move has ended the game and how - checkmate or draw.
+            </summary>
+            <param name="type"></param>
+            <returns>Returns the type of move - a bit flag enum.</returns>
+        </member>
+        <member name="M:Chess.Board.WinFormsBoard.PlayerHasPossibleMoves">
+            <summary>
+            Chesck whether the player on the move has possible moves.
+            </summary>
+            <returns>True if the player on the move has possible moves, otherwise false.</returns>
+        </member>
+        <member name="M:Chess.Board.WinFormsBoard.LegalMovesForPiece(Chess.Pieces.Piece)">
+            <summary>
+            Calculates all the legal moves for a given piece.
+            </summary>
+            <param name="piece"></param>
+            <returns>A list of all possible moves as tuples (row, column).</returns>
+        </member>
+        <member name="M:Chess.Board.WinFormsBoard.LegalMovesForPiece(System.Int32,System.Int32)">
+            <summary>
+            Calculates all the legal moves for the piece on the given coordinates.
+            </summary>
+            <param name="row"></param>
+            <param name="column"></param>
+            <returns>A list of all possible moves as tuples (row, column).</returns>
+        </member>
+        <member name="M:Chess.Board.WinFormsBoard.IsProtectingKing(Chess.Pieces.Piece)">
+            <summary>
+            Checks if the given piece is protecting its king.
+            </summary>
+            <param name="piece"></param>
+            <returns>True if the piece is protecting its king from being attacked, otherwise false/.</returns>
+        </member>
+        <member name="M:Chess.Board.WinFormsBoard.IsProtectingKing(Chess.Pieces.Piece,System.Int32,System.Int32)">
+            <summary>
+            Checks if the given piece is protecting its king.
+            </summary>
+            <param name="piece"></param>
+            <param name="row"></param>
+            <param name="column"></param>
+            <returns>True if the given piece is protecting its king from being attacked, otherwise false.</returns>
+        </member>
+        <member name="M:Chess.Board.WinFormsBoard.MovePiece(Chess.Pieces.Piece,System.Int32,System.Int32)">
+            <summary>
+            Moves the piece passed as argument to specified square and handles the special movements (pawn En Passant, King's Castling).
+            </summary>
+            <param name="piece"></param>
+            <param name="row"></param>
+            <param name="column"></param>
+        </member>
+        <member name="M:Chess.Board.WinFormsBoard.PawnEnPassant(Chess.Pieces.Pawn,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Handles the En Passant movement by Pawn.
+            </summary>
+            <param name="pawn"></param>
+            <param name="row"></param>
+            <param name="column"></param>
+            <param name="oldRow"></param>
+            <param name="oldColumn"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Board.WinFormsBoard.PawnPromotion(Chess.Pieces.Pawn)">
+            <summary>
+            Handles the promotion of pawns when they reach the final row.
+            </summary>
+            <param name="pawn"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Board.WinFormsBoard.EnableEnPassant(Chess.Pieces.Pawn,System.Int32,System.Int32)">
+            <summary>
+            Triggers the change of bool <see cref="P:Chess.Pieces.Pawn.CanDoEnPassant"/> to true for the pawns that may take this move.
+            </summary>
+            <param name="piece"></param>
+            <param name="row"></param>
+            <param name="column"></param>
+        </member>
+        <member name="M:Chess.Board.WinFormsBoard.DoCastling(System.Int32,System.Int32,Chess.MoveType)">
+            <summary>
+            Handles the Castling move by King and one of its Rooks.
+            </summary>
+            <param name="row"></param>
+            <param name="column"></param>
+            <param name="type"></param>
+            <returns><see cref="T:Chess.MoveType"/> enum that contains information about what has happened in the given round.</returns>
+        </member>
+        <member name="M:Chess.Board.WinFormsBoard.PreventEnPassantInFutureMoves(Chess.Pieces.PieceColor)">
+            <summary>
+            Changes the bool <see cref="P:Chess.Pieces.Pawn.CanDoEnPassant"/> to false at the end of each turn.
+            </summary>
+            <param name="color"></param>
+        </member>
+        <member name="P:Chess.Board.WinFormsBoard.Item(System.Int32,System.Int32)">
+            <summary>
+            Returns the piece at the square with the given coordinates. Read-only.
+            </summary>
+            <param name="row"></param>
+            <param name="column"></param>
+        </member>
+        <member name="T:Chess.Chess">
+            <summary>
+            Provides the GUI for the chess board, handles user input and passes it to underlying objects.
+            </summary>
+        </member>
+        <member name="P:Chess.Chess.ActiveCell">
+            <summary>
+            Keeps a reference to the cell last clicked by the user.
+            </summary>
+        </member>
+        <member name="P:Chess.Chess.HighlightedCells">
+            <summary>
+            A list of coordinates for chessboard squares that are being highlighted showing possible moves for the piecen in the <see cref="P:Chess.Chess.ActiveCell"/>.
+            </summary>
+        </member>
+        <member name="P:Chess.Chess.Colors">
+            <summary>
+            A dictionary storing the original color of each square on the chessboard.
+            </summary>
+        </member>
+        <member name="P:Chess.Chess.Board">
+            <summary>
+            A reference to the object storing the pieces and making all calculations.
+            </summary>
+        </member>
+        <member name="P:Chess.Chess.Finished">
+            <summary>
+            Boolean property used after the game has finished to prevent other methods from finishing their work due to changed circumstances.
+            </summary>
+        </member>
+        <member name="M:Chess.Chess.#ctor">
+            <summary>
+            Creates an instance of the Chess class.
+            </summary>
+        </member>
+        <member name="M:Chess.Chess.Winner(Chess.Pieces.PieceColor)">
+            <summary>
+            Handles the end-of-game case when one player defeats the other.
+            </summary>
+            <param name="color"></param>
+        </member>
+        <member name="M:Chess.Chess.Draw">
+            <summary>
+            Handles the end-of-game scenario when the game can no longer progress.
+            </summary>
+        </member>
+        <member name="M:Chess.Chess.EndOfGame(System.Nullable{Chess.Pieces.PieceColor})">
+            <summary>
+            Provides the visual feedback to the user based on how the game ended.
+            </summary>
+            <param name="color"></param>
+        </member>
+        <member name="M:Chess.Chess.SetUp">
+            <summary>
+            Creates an instance of a class implemeenting the <see cref="T:Chess.Board.IBoard"/> interface, starting a game.
+            </summary>
+        </member>
+        <member name="M:Chess.Chess.CreateBoard">
+            <summary>
+            Creates a visual representation of a chessboard.
+            </summary>
+        </member>
+        <member name="M:Chess.Chess.dataGridView1_CellClick(System.Object,System.Windows.Forms.DataGridViewCellEventArgs)">
+            <summary>
+            Handles the user clicking on a square.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Chess.Chess.MovePiece(System.Windows.Forms.DataGridViewCellEventArgs)">
+            <summary>
+            Passes the user input to <see cref="T:Chess.Board.IBoard"/> if it would result in a movement of a piece, adjusts the font color of the square if the piece is black to
+            more easily distinguish between the colors of the pieces.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Chess.Chess.SetPiecePosition(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Handles moving a piece on the chessboard.
+            </summary>
+            <param name="startRow"></param>
+            <param name="startColumn"></param>
+            <param name="endRow"></param>
+            <param name="endColumn"></param>
+        </member>
+        <member name="M:Chess.Chess.AdjustCellFontColor">
+            <summary>
+            Adjusts the font color for all squares to more easily distinguis between the colors of the pieces.
+            </summary>
+        </member>
+        <member name="M:Chess.Chess.PromotePawn">
+            <summary>
+            Handles the promotion of a pawn - creates a GUI where the user selects the desired piece and passes this information to <see cref="T:Chess.Board.IBoard"/>.
+            </summary>
+            <returns>The type of the piece selected by the user.</returns>
+        </member>
+        <member name="M:Chess.Chess.ClearHighlighted">
+            <summary>
+            Restores the color of the highlighted cells to their original color.
+            </summary>
+        </member>
+        <member name="M:Chess.Chess.ResetCell(System.Windows.Forms.DataGridViewCell)">
+            <summary>
+            Restores the color of a single cell to its original color.
+            </summary>
+        </member>
+        <member name="F:Chess.Chess.components">
+            <summary>
+             Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Chess.Chess.Dispose(System.Boolean)">
+            <summary>
+             Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Chess.Chess.InitializeComponent">
+            <summary>
+             Required method for Designer support - do not modify
+             the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Chess.Move">
+            <summary>
+            Struct used to capture data about each move made in a give game.
+            </summary>
+        </member>
+        <member name="P:Chess.Move.Piece">
+            <summary>
+            The piece taking this move.
+            </summary>
+        </member>
+        <member name="P:Chess.Move.StartRow">
+            <summary>
+            The starting row of the piece.
+            </summary>
+        </member>
+        <member name="P:Chess.Move.StartColumn">
+            <summary>
+            The starting column of the piece.
+            </summary>
+        </member>
+        <member name="P:Chess.Move.Row">
+            <summary>
+            The end row of the piece.
+            </summary>
+        </member>
+        <member name="P:Chess.Move.Column">
+            <summary>
+            The end column of the piece.
+            </summary>
+        </member>
+        <member name="P:Chess.Move.Type">
+            <summary>
+            The <see cref="T:Chess.MoveType"/> enum that contains information about events during the piece's move.
+            </summary>
+        </member>
+        <member name="M:Chess.Move.#ctor(Chess.Pieces.Piece,System.Int32,System.Int32,System.Int32,System.Int32,Chess.MoveType)">
+            <summary>
+            Creates an instance of the Move struct.
+            </summary>
+            <param name="piece"></param>
+            <param name="startRow"></param>
+            <param name="startColumn"></param>
+            <param name="moveRow"></param>
+            <param name="moveColumn"></param>
+            <param name="moveType"></param>
+        </member>
+        <member name="T:Chess.MoveType">
+            <summary>
+            This is used to capture additional characteristics of a given move -
+            whether a check was made, piece captured etc.
+            </summary>
+        </member>
+        <member name="F:Chess.MoveType.Normal">
+            <summary>
+            Nothing noteworthy has happened.
+            </summary>
+        </member>
+        <member name="F:Chess.MoveType.Capture">
+            <summary>
+            A piece was captured during the move.
+            </summary>
+        </member>
+        <member name="F:Chess.MoveType.EnPassantCapture">
+            <summary>
+            A pawn was captured by the En Passant move.
+            </summary>
+        </member>
+        <member name="F:Chess.MoveType.QueensideCastling">
+            <summary>
+            King has castled to the Queen's side.
+            </summary>
+        </member>
+        <member name="F:Chess.MoveType.KingsideCastling">
+            <summary>
+            King has castled to the King's side.
+            </summary>
+        </member>
+        <member name="F:Chess.MoveType.Check">
+            <summary>
+            The move resulted in a check.
+            </summary>
+        </member>
+        <member name="F:Chess.MoveType.CheckMate">
+            <summary>
+            The move resulted in a checkmate.
+            </summary>
+        </member>
+        <member name="F:Chess.MoveType.Draw">
+            <summary>
+            The move resulted in a draw.
+            </summary>
+        </member>
+        <member name="F:Chess.MoveType.PawnPromotion">
+            <summary>
+            A pawn was promoted.
+            </summary>
+        </member>
+        <member name="T:Chess.Moves">
+            <summary>
+            Provides a means of collecting data about all moves made in a given game,
+            optionally may export this into a text file formatted as standard notation.
+            </summary>
+        </member>
+        <member name="M:Chess.Moves.#ctor">
+            <summary>
+            Creates an instance of <see cref="T:Chess.Moves"/>
+            </summary>
+        </member>
+        <member name="M:Chess.Moves.Add(Chess.Move)">
+            <summary>
+            Add Move struct to a collection of moves.
+            </summary>
+            <remarks>
+            See <see cref="T:Chess.Move"/>
+            </remarks>
+            <param name="move"></param>
+        </member>
+        <member name="M:Chess.Moves.ExportToText">
+            <summary>
+            Iterates through collection of moves, translates it to standard notation,
+            and appends it to a text file "moves.txt".
+            </summary>
+        </member>
+        <member name="T:Chess.PawnPromotionGUI">
+            <summary>
+            Used to provide a means of selecting a new piece after pawn promotion.
+            </summary>
+        </member>
+        <member name="M:Chess.PawnPromotionGUI.#ctor">
+            <summary>
+            Creates an instance of <see cref="T:Chess.PawnPromotionGUI"/>
+            </summary>
+        </member>
+        <member name="F:Chess.PawnPromotionGUI.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Chess.PawnPromotionGUI.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Chess.PawnPromotionGUI.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Chess.PromotedPiece">
+            <summary>
+            Used with <see cref="T:Chess.PawnPromotionGUI"/>
+            </summary>
+        </member>
+        <member name="F:Chess.PromotedPiece.Queen">
+            <summary>
+            Indicates the user has selected the Queen.
+            </summary>
+        </member>
+        <member name="F:Chess.PromotedPiece.Rook">
+            <summary>
+            Indicates the user has selected the Rook.
+            </summary>
+        </member>
+        <member name="F:Chess.PromotedPiece.Bishop">
+            <summary>
+            Indicates the user has selected the Bishop.
+            </summary>
+        </member>
+        <member name="F:Chess.PromotedPiece.Knight">
+            <summary>
+            Indicates the user has selected the Knight.
+            </summary>
+        </member>
+        <member name="F:Chess.PromotedPiece.None">
+            <summary>
+            Indicates the user has not yet selected a piece.
+            </summary>
+        </member>
+        <member name="T:Chess.Pieces.Bishop">
+            <summary>
+            Class that represents the Bishop piece on the chessboard. Provides movement typical for Bishops.
+            </summary>
+        </member>
+        <member name="M:Chess.Pieces.Bishop.#ctor(Chess.Pieces.PieceColor,System.Int32,System.Int32,Chess.Board.IBoard)">
+            <summary>
+            Creates an instance of the Bishop class.
+            </summary>
+            <param name="color"></param>
+            <param name="rowIndex"></param>
+            <param name="columnIndex"></param>
+            <param name="board"></param>
+        </member>
+        <member name="M:Chess.Pieces.Bishop.PossibleMoves">
+            <summary>
+            Override method, calculates all possible moves for a given piece.
+            </summary>
+            <returns>A list of all possible moves as tuples (row, column).</returns>
+        </member>
+        <member name="M:Chess.Pieces.Bishop.BishopPossibleMoves(Chess.Pieces.Piece)">
+            <summary>
+            Static method that calculates all moves a bishop can make if put into the position of the piece given as an argument.
+            Calculates the moves for Bishop and Queen.
+            </summary>
+            <param name="piece"></param>
+            <returns>A list of all possible moves as tuples (row, column).</returns>
+        </member>
+        <member name="M:Chess.Pieces.Bishop.IsAttackingSquare(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Checks whether the piece is attacking a given square to put restraints on king and other piece movements.
+            </summary>
+            <param name="otherRowIndex"></param>
+            <param name="otherColumnIndex"></param>
+            <param name="threateningKing"></param>
+            <returns>True if the piece is attacking a given square, otherwise false.</returns>
+        </member>
+        <member name="M:Chess.Pieces.Bishop.IsAttackingSquare(Chess.Pieces.Piece,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Static method that checks whether the piece is attacking a given square to put restraints on king and other piece movements.
+            This is used for calculating Bishop and Queen movements.
+            </summary>
+            <param name="piece"></param>
+            <param name="otherRowIndex"></param>
+            <param name="otherColumnIndex"></param>
+            <param name="threateningKing"></param>
+            <returns>True if the piece is attacking a given square, otherwise false.</returns>
+        </member>
+        <member name="T:Chess.Pieces.PieceColor">
+            <summary>
+            Denotes Piece color, is also used to ensure pawns move only in the proper direction (up or down based on color).
+            </summary>
+        </member>
+        <member name="F:Chess.Pieces.PieceColor.White">
+            <summary>
+            White piece color, white pawns move down (row index decreases).
+            </summary>
+        </member>
+        <member name="F:Chess.Pieces.PieceColor.Black">
+            <summary>
+            Black piece color, black pawns move down (row index increases).
+            </summary>
+        </member>
+        <member name="T:Chess.Pieces.CaptureMode">
+            <summary>
+            This is used to ensure pawns are blocked when they should be, and require a piece of opposite color to capture diagonally.
+            </summary>
+        </member>
+        <member name="F:Chess.Pieces.CaptureMode.All">
+            <summary>
+            Piece can move to a square if it is unoccupied or occupied by a piece of the opposing color.
+            </summary>
+        </member>
+        <member name="F:Chess.Pieces.CaptureMode.NoCapture">
+            <summary>
+            Piece can only move to an unoccupied square - used by pawns.
+            </summary>
+        </member>
+        <member name="F:Chess.Pieces.CaptureMode.CaptureOnly">
+            <summary>
+            Piece can only move to a square occupied by a piece of the opposing color - used by pawns.
+            </summary>
+        </member>
+        <member name="T:Chess.Pieces.King">
+            <summary>
+            Class that represents the Bishop piece on the chessboard. Provides movement typical for Kings.
+            </summary>
+        </member>
+        <member name="P:Chess.Pieces.King.IsUnderAttack">
+            <summary>
+            Provides a quick check whether the king is currently being attacked by pieces of opposing color.
+            </summary>
+        </member>
+        <member name="P:Chess.Pieces.King.IsCastling">
+            <summary>
+            Provides a quick check whether the current move is castling.
+            </summary>
+            <remarks>This property needs to be set to false again in the method handling the piece movement on the board!</remarks>
+        </member>
+        <member name="M:Chess.Pieces.King.#ctor(Chess.Pieces.PieceColor,System.Int32,System.Int32,Chess.Board.IBoard)">
+            <summary>
+            Creates an instance of the King class.
+            </summary>
+            <param name="color"></param>
+            <param name="rowIndex"></param>
+            <param name="columnIndex"></param>
+            <param name="board"></param>
+        </member>
+        <member name="M:Chess.Pieces.King.PossibleMoves">
+            <summary>
+            Override method, calculates all possible moves for a given piece.
+            </summary>
+            <returns>A list of all possible moves as tuples (row, column).</returns>
+        </member>
+        <member name="M:Chess.Pieces.King.CheckForCastlingOpportunities(System.Collections.Generic.List{System.ValueTuple{System.Int32,System.Int32}})">
+            <summary>
+            Checks whether the king can castle to either side
+            </summary>
+            <param name="possibleMoves"></param>
+        </member>
+        <member name="M:Chess.Pieces.King.CastlingPossibleForSquare(System.Int32,System.Int32)">
+            <summary>
+            Checks if the king can castle through the given square.
+            </summary>
+            <param name="row"></param>
+            <param name="column"></param>
+            <returns>True if can castle through the given square, otherwise false.</returns>
+        </member>
+        <member name="M:Chess.Pieces.King.IsBeingProtected">
+            <summary>
+            Checks whether the king is protected in its current spot without triggering <see cref="P:Chess.Pieces.King.IsUnderAttack"/> change.
+            Used by other pieces to determine whether they may move to a certain position.
+            </summary>
+            <returns>True if the king is protected in its current position.</returns>
+        </member>
+        <member name="M:Chess.Pieces.King.IsBeingProtected(Chess.Pieces.Piece)">
+            <summary>
+            Checks whether the king is protected in its current spot without triggering <see cref="P:Chess.Pieces.King.IsUnderAttack"/> change.
+            Used by other pieces to determine whether they may move to a certain position.
+            </summary>
+            <remarks>This overload returns true even if the king is being attacked by the piece given as argument.
+            This is used by other pieces to check whether they may move to a different position even if the piece is protecting its king
+            from being attacked - to capture the attacking piece for example.</remarks>
+            <param name="ignoreThisPiece"></param>
+            <returns>True if the king is protected in its current position.</returns>
+        </member>
+        <member name="M:Chess.Pieces.King.IsSquareUnderAttack(System.Int32,System.Int32,System.Boolean,Chess.Pieces.Piece)">
+            <summary>
+            Checks whether the given square is being attacked
+            </summary>
+            <param name="row"></param>
+            <param name="column"></param>
+            <param name="occupied"></param>
+            <param name="ignoreThisPiece"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Pieces.King.CheckIsUnderAttack">
+            <summary>
+            Checks whether the king is being attacked and sets the <see cref="P:Chess.Pieces.King.IsUnderAttack"/> to true if yes.
+            </summary>
+            <returns>True if the king is being attacked, otherwise false.</returns>
+        </member>
+        <member name="M:Chess.Pieces.King.IsAttackingSquare(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Checks whether the piece is attacking a given square to put restraints on king and other piece movements.
+            </summary>
+            <param name="otherRowIndex"></param>
+            <param name="otherColumnIndex"></param>
+            <param name="_"></param>
+            <returns>True if the piece is attacking a given square, otherwise false.</returns>
+        </member>
+        <member name="M:Chess.Pieces.King.Move(System.Int32,System.Int32)">
+            <summary>
+            Override method, sets the <see cref="P:Chess.Pieces.King.IsCastling"/> property to true if conditions are met.
+            </summary>
+            <param name="row"></param>
+            <param name="column"></param>
+        </member>
+        <member name="T:Chess.Pieces.Knight">
+            <summary>
+            Class that represents the Knight piece on the chessboard. Provides movement typical for Knights.
+            </summary>
+        </member>
+        <member name="M:Chess.Pieces.Knight.#ctor(Chess.Pieces.PieceColor,System.Int32,System.Int32,Chess.Board.IBoard)">
+            <summary>
+            Creates an instance of the Knight class.
+            </summary>
+            <param name="color"></param>
+            <param name="rowIndex"></param>
+            <param name="columnIndex"></param>
+            <param name="board"></param>
+        </member>
+        <member name="M:Chess.Pieces.Knight.PossibleMoves">
+            <summary>
+            Override method, calculates all possible moves for a given piece.
+            </summary>
+            <returns>A list of all possible moves as tuples (row, column).</returns>
+        </member>
+        <member name="M:Chess.Pieces.Knight.IsAttackingSquare(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Checks whether the piece is attacking a given square to put restraints on king and other piece movements.
+            </summary>
+            <param name="otherRowIndex"></param>
+            <param name="otherColumnIndex"></param>
+            <param name="threateningKing"></param>
+            <returns>True if the piece is attacking a given square, otherwise false.</returns>
+        </member>
+        <member name="T:Chess.Pieces.Pawn">
+            <summary>
+            Class that represents the Pawn pieces on the chessboard. Provides movement typical for Pawns.
+            </summary>
+        </member>
+        <member name="P:Chess.Pieces.Pawn.CanDoEnPassant">
+            <summary>
+            Stores whether the pawn is allowed to perform an En Passant capture against other pawns and in which direction the pawn may perform this move.
+            </summary>
+        </member>
+        <member name="M:Chess.Pieces.Pawn.#ctor(Chess.Pieces.PieceColor,System.Int32,System.Int32,Chess.Board.IBoard)">
+            <summary>
+            Creates an instance of the Pawn class.
+            </summary>
+            <param name="color"></param>
+            <param name="rowIndex"></param>
+            <param name="columnIndex"></param>
+            <param name="board"></param>
+        </member>
+        <member name="M:Chess.Pieces.Pawn.PossibleMoves">
+            <summary>
+            Override method, calculates all possible moves for a given piece.
+            </summary>
+            <returns>A list of all possible moves as tuples (row, column).</returns>
+        </member>
+        <member name="M:Chess.Pieces.Pawn.IsAttackingSquare(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Checks whether the piece is attacking a given square to put restraints on king and other piece movements.
+            </summary>
+            <param name="otherRowIndex"></param>
+            <param name="otherColumnIndex"></param>
+            <param name="threateningKing"></param>
+            <returns>True if the piece is attacking a given square, otherwise false.</returns>
+        </member>
+        <member name="T:Chess.Pieces.Piece">
+            <summary>
+            Abstract base class for other pieces, provides shared members and methods.
+            </summary>
+        </member>
+        <member name="P:Chess.Pieces.Piece.Color">
+            <summary>
+            Determines the color of a given piece.
+            </summary>
+            <remarks>
+            See <see cref="T:Chess.Pieces.PieceColor"/>
+            </remarks>
+        </member>
+        <member name="P:Chess.Pieces.Piece.UnicodeValue">
+            <summary>
+            Provides a unicode character that should correspond visually with the piece and color it represents.
+            </summary>
+        </member>
+        <member name="P:Chess.Pieces.Piece.RowIndex">
+            <summary>
+            Provides an index of the row on which the piece is located.
+            </summary>
+        </member>
+        <member name="P:Chess.Pieces.Piece.ColumnIndex">
+            <summary>
+            Provides an index of the column on which the piece is located.
+            </summary>
+        </member>
+        <member name="P:Chess.Pieces.Piece.Board">
+            <summary>
+            Provides a reference to the <see cref="T:Chess.Board.IBoard"/> object that is used to run the game.
+            </summary>
+        </member>
+        <member name="P:Chess.Pieces.Piece.HasMoved">
+            <summary>
+            Provides a check whether the piece has moved - important for several pieces.
+            </summary>
+        </member>
+        <member name="M:Chess.Pieces.Piece.PossibleMoves">
+            <summary>
+            Abstract method, override should calculate all possible moves for a given piece.
+            </summary>
+            <returns>A list of all possible moves as tuple(int, int).</returns>
+        </member>
+        <member name="M:Chess.Pieces.Piece.IsAttackingSquare(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Abstract method, override should check whether the piece is attacking a given square to put restraints on king and other piece movements.
+            </summary>
+            <param name="otherRowIndex"></param>
+            <param name="otherColumnIndex"></param>
+            <param name="threateningKing"></param>
+            <returns>True if the piece is attacking a given square, otherwise false.</returns>
+        </member>
+        <member name="M:Chess.Pieces.Piece.CheckCanMoveToSquare(System.Int32,System.Int32,System.Collections.Generic.List{System.ValueTuple{System.Int32,System.Int32}},Chess.Pieces.CaptureMode)">
+            <summary>
+            Checks whether the piece is allowed to move to the given square - if is in bounds,
+            unoccupied or occupied by the correct piece in the given context and adds the square coordinates
+            to the list of possible moves for the piece.
+            </summary>
+            <param name="row"></param>
+            <param name="column"></param>
+            <param name="possibleMoves"></param>
+            <param name="captureMode"></param>
+            <returns>True if the square is a legal move, otherwise false.</returns>
+        </member>
+        <member name="M:Chess.Pieces.Piece.IsProtectingKingInThisPosition(System.Int32,System.Int32)">
+            <summary>
+            Checks if the king would be protected should the piece be moved to this position.
+            </summary>
+            <param name="row"></param>
+            <param name="column"></param>
+            <returns>True if king would be protected, otherwise false.</returns>
+        </member>
+        <member name="M:Chess.Pieces.Piece.Move(System.Int32,System.Int32)">
+            <summary>
+            Handles the internals of moving the piece from the viewpoint of the piece - changing it's row and column
+            and setting it's <see cref="P:Chess.Pieces.Piece.HasMoved"/> property to true.
+            </summary>
+            <param name="row"></param>
+            <param name="column"></param>
+        </member>
+        <member name="M:Chess.Pieces.Piece.ToString">
+            <summary>
+            Converts the piece to it's unicode representation as string.
+            </summary>
+            <returns>Unicode representation of the piece as string.</returns>
+        </member>
+        <member name="M:Chess.Pieces.Piece.IsInBounds(System.ValueTuple{System.Int32,System.Int32})">
+            <summary>
+            Checks whether the coordinates as tuple(int, int) are a part of the board.
+            </summary>
+            <param name="tuple"></param>
+            <returns>True if the coordinates are a part of the board.</returns>
+        </member>
+        <member name="M:Chess.Pieces.Piece.IsInBounds(System.Int32,System.Int32)">
+            <summary>
+            Checks whether the coordinates as int, int are a part of the board.
+            </summary>
+            <param name="row"></param>
+            <param name="column"></param>
+            <returns>True if the coordinates are a part of the board.</returns>
+        </member>
+        <member name="T:Chess.Pieces.Queen">
+            <summary>
+            Class that represents the Queen piece on the chessboard.
+            </summary>
+        </member>
+        <member name="M:Chess.Pieces.Queen.#ctor(Chess.Pieces.PieceColor,System.Int32,System.Int32,Chess.Board.IBoard)">
+            <summary>
+            Creates an instance of the Queen class.
+            </summary>
+            <param name="color"></param>
+            <param name="rowIndex"></param>
+            <param name="columnIndex"></param>
+            <param name="board"></param>
+        </member>
+        <member name="M:Chess.Pieces.Queen.PossibleMoves">
+            <summary>
+            Override method, calculates all possible moves for a given piece.
+            </summary>
+            <returns>A list of all possible moves as tuples (row, column).</returns>
+        </member>
+        <member name="M:Chess.Pieces.Queen.IsAttackingSquare(System.Int32,System.Int32)">
+            <summary>
+            Checks whether the piece is attacking a given square to put restraints on king and other piece movements.
+            </summary>
+            <param name="otherRowIndex"></param>
+            <param name="otherColumnIndex"></param>
+            <returns>True if the piece is attacking a given square, otherwise false.</returns>
+        </member>
+        <member name="M:Chess.Pieces.Queen.IsAttackingSquare(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Checks whether the piece is attacking a given square to put restraints on king and other piece movements.
+            </summary>
+            <param name="otherRowIndex"></param>
+            <param name="otherColumnIndex"></param>
+            <param name="threateningKing"></param>
+            <returns>True if the piece is attacking a given square, otherwise false.</returns>
+        </member>
+        <member name="T:Chess.Pieces.Rook">
+            <summary>
+            Class that represents the Rook piece on the chessboard. Provides movement typical for Rooks.
+            </summary>
+        </member>
+        <member name="M:Chess.Pieces.Rook.#ctor(Chess.Pieces.PieceColor,System.Int32,System.Int32,Chess.Board.IBoard)">
+            <summary>
+            Creates an instance of the Rook class.
+            </summary>
+            <param name="color"></param>
+            <param name="rowIndex"></param>
+            <param name="columnIndex"></param>
+            <param name="board"></param>
+        </member>
+        <member name="M:Chess.Pieces.Rook.PossibleMoves">
+            <summary>
+            Override method, calculates all possible moves for a given piece.
+            </summary>
+            <returns>A list of all possible moves as tuples (row, column).</returns>
+        </member>
+        <member name="M:Chess.Pieces.Rook.RookPossibleMoves(Chess.Pieces.Piece)">
+            <summary>
+            Static method that calculates all moves a rook can make if put into the position of the piece given as an argument.
+            Calculates the moves for Rook and Queen.
+            </summary>
+            <param name="piece"></param>
+            <returns>A list of all possible moves as tuples (row, column).</returns>
+        </member>
+        <member name="M:Chess.Pieces.Rook.IsAttackingSquare(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Checks whether the piece is attacking a given square to put restraints on king and other piece movements.
+            </summary>
+            <param name="otherRowIndex"></param>
+            <param name="otherColumnIndex"></param>
+            <param name="threateningKing"></param>
+            <returns>True if the piece is attacking a given square, otherwise false.</returns>
+        </member>
+        <member name="M:Chess.Pieces.Rook.IsAttackingSquare(Chess.Pieces.Piece,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Static method that checks whether the piece is attacking a given square to put restraints on king and other piece movements.
+            This is used for calculating Rook and Queen movements.
+            </summary>
+            <param name="piece"></param>
+            <param name="otherRowIndex"></param>
+            <param name="otherColumnIndex"></param>
+            <param name="threateningKing"></param>
+            <returns>True if the piece is attacking a given square, otherwise false.</returns>
+        </member>
+        <member name="M:Chess.Program.Main">
+            <summary>
+             The main entry point for the application.
+            </summary>
+        </member>
+    </members>
+</doc>
