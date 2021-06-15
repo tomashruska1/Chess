@@ -43,6 +43,7 @@ namespace Chess.Board
         /// Represents the color that is currently on the move.
         /// </summary>
         public PieceColor NextMove { get; private set; }
+
         /// <summary>
         /// Represents the <see cref="DataGridView"/> object displaying the chessboard.
         /// </summary>
