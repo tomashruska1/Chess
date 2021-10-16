@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ChessUI</name>
+    </assembly>
+    <members>
+        <member name="T:Chess.ChessUI.AfterEndOfGameGUI">
+            <summary>
+            Provides a means of selecting an action after the end of each game.
+            </summary>
+        </member>
+        <member name="M:Chess.ChessUI.AfterEndOfGameGUI.#ctor(System.String)">
+            <summary>
+            Creates an instance of <see cref="T:Chess.ChessUI.AfterEndOfGameGUI"/>
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="F:Chess.ChessUI.AfterEndOfGameGUI.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Chess.ChessUI.AfterEndOfGameGUI.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Chess.ChessUI.AfterEndOfGameGUI.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Chess.ChessUI.Enums.AfterEndOfGameEnum">
+            <summary>
+            Used with <see cref="T:Chess.ChessUI.AfterEndOfGameGUI"/>
+            </summary>
+        </member>
+        <member name="F:Chess.ChessUI.Enums.AfterEndOfGameEnum.NewGame">
+            <summary>
+            Indicates the user has chosen to play a new game.
+            </summary>
+        </member>
+        <member name="F:Chess.ChessUI.Enums.AfterEndOfGameEnum.ExportMoves">
+            <summary>
+            Indicates the user wishes to export the moves to a text file.
+            </summary>
+        </member>
+        <member name="F:Chess.ChessUI.Enums.AfterEndOfGameEnum.None">
+            <summary>
+            Indicates the user has not yet selected what to do next.
+            </summary>
+        </member>
+        <member name="T:Chess.ChessUI.PawnPromotionGUI">
+            <summary>
+            Used to provide a means of selecting a new piece after pawn promotion.
+            </summary>
+        </member>
+        <member name="M:Chess.ChessUI.PawnPromotionGUI.#ctor">
+            <summary>
+            Creates an instance of <see cref="T:Chess.ChessUI.PawnPromotionGUI"/>
+            </summary>
+        </member>
+        <member name="F:Chess.ChessUI.PawnPromotionGUI.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Chess.ChessUI.PawnPromotionGUI.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Chess.ChessUI.PawnPromotionGUI.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:Chess.ChessUI.Program.Main">
+            <summary>
+             The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:Chess.ChessUI.WinFormsChessInterface">
+            <summary>
+            Provides the GUI for the chess board, handles user input and passes it to underlying objects.
+            </summary>
+        </member>
+        <member name="P:Chess.ChessUI.WinFormsChessInterface.ActiveCell">
+            <summary>
+            Keeps a reference to the cell last clicked by the user.
+            </summary>
+        </member>
+        <member name="P:Chess.ChessUI.WinFormsChessInterface.HighlightedCells">
+            <summary>
+            A list of coordinates for chessboard squares that are being highlighted showing possible moves for the pieces in the <see cref="P:Chess.ChessUI.WinFormsChessInterface.ActiveCell"/>.
+            </summary>
+        </member>
+        <member name="P:Chess.ChessUI.WinFormsChessInterface.Colors">
+            <summary>
+            A dictionary storing the original color of each square on the chessboard.
+            </summary>
+        </member>
+        <member name="P:Chess.ChessUI.WinFormsChessInterface.Controller">
+            <summary>
+            A reference to the object storing the pieces and making all calculations.
+            </summary>
+        </member>
+        <member name="P:Chess.ChessUI.WinFormsChessInterface.Finished">
+            <summary>
+            Boolean property used after the game has finished to prevent other methods from finishing their work due to changed circumstances.
+            </summary>
+        </member>
+        <member name="M:Chess.ChessUI.WinFormsChessInterface.#ctor">
+            <summary>
+            Creates an instance of the Chess class.
+            </summary>
+        </member>
+        <member name="M:Chess.ChessUI.WinFormsChessInterface.EndOfGame(Chess.Application.Enums.GameResultEnum)">
+            <summary>
+            Action taken when a game has ended with the result <paramref name="endOfGame"/>.
+            </summary>
+            <param name="endOfGame"></param>
+        </member>
+        <member name="M:Chess.ChessUI.WinFormsChessInterface.NewGame">
+            <summary>
+            Starts a new game of chess for two human players.
+            </summary>
+        </member>
+        <member name="M:Chess.ChessUI.WinFormsChessInterface.NewGame(Chess.Application.Enums.PieceColor)">
+            <summary>
+            Starts a new game of chess against an AI.
+            </summary>
+            <param name="aiColor"></param>
+        </member>
+        <member name="M:Chess.ChessUI.WinFormsChessInterface.CreateBoard">
+            <summary>
+            Creates a visual representation of a chessboard.
+            </summary>
+        </member>
+        <member name="M:Chess.ChessUI.WinFormsChessInterface.ChessboardSquareClick(System.Object,System.Windows.Forms.DataGridViewCellEventArgs)">
+            <summary>
+            Handles the user clicking on a square.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Chess.ChessUI.WinFormsChessInterface.HighlightPossibleMoves">
+            <summary>
+            Changes color of the squares currently held piece can move to.
+            </summary>
+        </member>
+        <member name="M:Chess.ChessUI.WinFormsChessInterface.MovePiece(Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
+            <summary>
+            Passes the user input to <see cref="T:Chess.Application.BoardControllers.IBoardController"/> if it would result in a movement of a piece, adjusts the font color of the square if the piece is black to
+            more easily distinguish between the colors of the pieces.
+            </summary>
+            <param name="fromSquare"></param>
+            <param name="toSquare"></param>
+        </member>
+        <member name="M:Chess.ChessUI.WinFormsChessInterface.SetPiecePosition(Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
+            <summary>
+            Visually moves a piece on the chessboard.
+            </summary>
+            <param name="fromSquare"></param>
+            <param name="toSquare"></param>
+        </member>
+        <member name="M:Chess.ChessUI.WinFormsChessInterface.RemovePiece(Chess.Application.Boards.Square)">
+            <summary>
+            Visually moves a piece on the chessboard.
+            </summary>
+            <param name="fromSquare"></param>
+        </member>
+        <member name="M:Chess.ChessUI.WinFormsChessInterface.AdjustCellFontColor">
+            <summary>
+            Adjusts the font color for all squares to more easily distinguish between the colors of the pieces.
+            </summary>
+        </member>
+        <member name="M:Chess.ChessUI.WinFormsChessInterface.PromotePawn">
+            <summary>
+            Handles the promotion of a pawn - creates a GUI where the user selects the desired piece and passes this information to <see cref="T:Chess.Application.BoardControllers.IBoardController"/>.
+            </summary>
+            <returns>The type of the piece selected by the user.</returns>
+        </member>
+        <member name="M:Chess.ChessUI.WinFormsChessInterface.ClearHighlighted">
+            <summary>
+            Restores the color of the highlighted cells to their original color.
+            </summary>
+        </member>
+        <member name="M:Chess.ChessUI.WinFormsChessInterface.ResetCell(System.Windows.Forms.DataGridViewCell)">
+            <summary>
+            Restores the color of a single cell to its original color.
+            </summary>
+        </member>
+        <member name="F:Chess.ChessUI.WinFormsChessInterface.components">
+            <summary>
+             Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Chess.ChessUI.WinFormsChessInterface.Dispose(System.Boolean)">
+            <summary>
+             Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Chess.ChessUI.WinFormsChessInterface.InitializeComponent">
+            <summary>
+             Required method for Designer support - do not modify
+             the contents of this method with the code editor.
+            </summary>
+        </member>
+    </members>
+</doc>

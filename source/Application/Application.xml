@@ -1,0 +1,1829 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Application</name>
+    </assembly>
+    <members>
+        <member name="T:Chess.Application.BoardControllers.BoardController">
+            <summary>
+            Implements the <see cref="T:Chess.Application.BoardControllers.IBoardController"/> interface, is used with a Windows Forms GUI.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.BoardControllers.BoardController.Board">
+            <summary>
+            Represents the chessboard.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.BoardControllers.BoardController.NextMove">
+            <summary>
+            Represents the color that is currently on the move.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.BoardControllers.BoardController.Moves">
+            <summary>
+            Represents all the moves made during the game, may export the data to a text file as standard notation.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.BoardControllers.BoardController.Form">
+            <summary>
+            Represents the Form implementing the GUI, is used to access the GUI methods.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.BoardControllers.BoardController.AIColor">
+            <summary>
+            Represents the color for which is the AI playing.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.BoardControllers.BoardController.#ctor(Chess.Application.BoardControllers.IChessboardInterface)">
+            <summary>
+            Creates an instance of <see cref="T:Chess.Application.BoardControllers.BoardController"/>.
+            </summary>
+            <param name="form"></param>
+        </member>
+        <member name="M:Chess.Application.BoardControllers.BoardController.#ctor(Chess.Application.BoardControllers.IChessboardInterface,Chess.Application.Enums.PieceColor)">
+            <summary>
+            Creates an instance of <see cref="T:Chess.Application.BoardControllers.BoardController"/> with AI playing as <paramref name="color"/>.
+            </summary>
+            <param name="form"></param>
+            <param name="color"></param>
+        </member>
+        <member name="M:Chess.Application.BoardControllers.BoardController.ValidMovesForPiece(Chess.Application.Pieces.Piece)">
+            <summary>
+            Calculates all the legal moves for a given piece.
+            </summary>
+            <param name="piece"></param>
+            <returns>A list of all possible moves as Square.</returns>
+        </member>
+        <member name="M:Chess.Application.BoardControllers.BoardController.ValidMovesForPiece(Chess.Application.Boards.Square)">
+            <summary>
+            Calculates all the legal moves for the piece on the given coordinates.
+            </summary>
+            <param name="square"></param>
+            <returns>A list of all possible moves as Square.</returns>
+        </member>
+        <member name="M:Chess.Application.BoardControllers.BoardController.MovePiece(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square)">
+            <summary>
+            Moves the piece passed as argument to specified square and handles the special movements (pawn En Passant, King's Castling).
+            </summary>
+            <param name="piece"></param>
+            <param name="square"></param>
+        </member>
+        <member name="M:Chess.Application.BoardControllers.BoardController.MovePiece(Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
+            <summary>
+            Moves the piece on the board, removes the piece of opposing color if it is on the square.
+            </summary>
+            <param name="fromSquare"></param>
+            <param name="toSquare"></param>
+        </member>
+        <member name="M:Chess.Application.BoardControllers.BoardController.GetPromotedPiece">
+            <summary>
+            Resolves which piece should a pawn be promoted into.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.BoardControllers.BoardController.StartGame">
+            <summary>
+            Signals to the controller that the game may start. Only has effect if an AI is playing as white.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.BoardControllers.BoardController.Item(Chess.Application.Boards.Square)">
+            <summary>
+            Returns the piece at the square with the given coordinates. Read-only.
+            </summary>
+            <param name="square"></param>
+            <returns>The piece on the given coordinates.</returns>
+        </member>
+        <member name="T:Chess.Application.BoardControllers.IBoardController">
+            <summary>
+            Interface that specifies the methods a board class needs to implement.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.BoardControllers.IBoardController.Board">
+            <summary>
+            Represents the chessboard.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.BoardControllers.IBoardController.Moves">
+            <summary>
+            Keeps a reference for all the moves made during the game, may export the data to a text file as standard notation.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.BoardControllers.IBoardController.NextMove">
+            <summary>
+            Represents the color that is currently on the move.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.BoardControllers.IBoardController.MovePiece(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square)">
+            <summary>
+            Moves the piece on the board, removes the piece of opposing color if it is on the square.
+            </summary>
+            <param name="piece"></param>
+            <param name="square"></param>
+        </member>
+        <member name="M:Chess.Application.BoardControllers.IBoardController.MovePiece(Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
+            <summary>
+            Moves the piece on the board, removes the piece of opposing color if it is on the square.
+            </summary>
+            <param name="fromSquare"></param>
+            <param name="toSquare"></param>
+        </member>
+        <member name="P:Chess.Application.BoardControllers.IBoardController.Item(Chess.Application.Boards.Square)">
+            <summary>
+            Provides a read-only access to the item on the given coordinates.
+            </summary>
+            <param name="square"></param>
+            <returns>The piece on the given coordinates.</returns>
+        </member>
+        <member name="M:Chess.Application.BoardControllers.IBoardController.ValidMovesForPiece(Chess.Application.Boards.Square)">
+            <summary>
+            Calculates all the legal moves for the piece on the given coordinates.
+            </summary>
+            <param name="square"></param>
+            <returns>A list of all possible moves as Square.</returns>
+        </member>
+        <member name="M:Chess.Application.BoardControllers.IBoardController.ValidMovesForPiece(Chess.Application.Pieces.Piece)">
+            <summary>
+            Calculates all the legal moves for a given piece.
+            </summary>
+            <param name="piece"></param>
+            <returns>A list of all possible moves as Square.</returns>
+        </member>
+        <member name="M:Chess.Application.BoardControllers.IBoardController.StartGame">
+            <summary>
+            Signals to the controller that the game may start. Only has effect if an AI is playing as white.
+            </summary>
+        </member>
+        <member name="T:Chess.Application.BoardControllers.IChessboardInterface">
+            <summary>
+            Specifies methods a user interface for the chess needs to implement.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.BoardControllers.IChessboardInterface.NewGame">
+            <summary>
+            Starts a new game of chess for two human players.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.BoardControllers.IChessboardInterface.NewGame(Chess.Application.Enums.PieceColor)">
+            <summary>
+            Starts a new game of chess against an AI.
+            </summary>
+            <param name="aiColor"></param>
+        </member>
+        <member name="M:Chess.Application.BoardControllers.IChessboardInterface.MovePiece(Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
+            <summary>
+            Moves a piece on <paramref name="fromSquare"/> to <paramref name="toSquare"/>.
+            </summary>
+            <param name="fromSquare"></param>
+            <param name="toSquare"></param>
+        </member>
+        <member name="M:Chess.Application.BoardControllers.IChessboardInterface.PromotePawn">
+            <summary>
+            Promotes a pawn based on player's feedback.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.BoardControllers.IChessboardInterface.EndOfGame(Chess.Application.Enums.GameResultEnum)">
+            <summary>
+            Action taken when a game has ended with the result <paramref name="endOfGame"/>.
+            </summary>
+            <param name="endOfGame"></param>
+        </member>
+        <member name="M:Chess.Application.BoardControllers.IChessboardInterface.SetPiecePosition(Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
+            <summary>
+            Visually moves a piece on the chessboard.
+            </summary>
+            <param name="fromSquare"></param>
+            <param name="toSquare"></param>
+        </member>
+        <member name="M:Chess.Application.BoardControllers.IChessboardInterface.RemovePiece(Chess.Application.Boards.Square)">
+            <summary>
+            Visually moves a piece on the chessboard.
+            </summary>
+            <param name="fromSquare"></param>
+        </member>
+        <member name="T:Chess.Application.BoardControllers.IPawnPromoter">
+            <summary>
+            Provides a method for resolving which piece should a pawn be promoted into.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.BoardControllers.IPawnPromoter.GetPromotedPiece">
+            <summary>
+            Resolves which piece should a pawn be promoted into.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Chess.Application.Boards.Board">
+            <summary>
+            Represents the Chessboard. Implements <see cref="T:Chess.Application.Boards.IBoard"/>.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Boards.Board.Item(Chess.Application.Boards.Square)">
+            <summary>
+            Returns the piece at the square with the given coordinates. Read-only.
+            </summary>
+            <param name="square"></param>
+            <returns>The piece on the given coordinates.</returns>
+        </member>
+        <member name="P:Chess.Application.Boards.Board.LineOfAttack">
+            <summary>
+            Keeps a reference for all pieces attacking the king of the opposite color and the paths they attack the king on.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Boards.Board.LivePieces">
+            <summary>
+            Keeps a reference for all the pieces on the board by color.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Boards.Board.Kings">
+            <summary>
+            Keeps a reference for both kings on the board by color.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Boards.Board.ChessBoard">
+            <summary>
+            An array holding the pieces on the chessboard.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Boards.Board.NextMove">
+            <summary>
+            Represents the color that is currently on the move.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Boards.Board.Winner">
+            <summary>
+            Represents the winner of the game.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Boards.Board.PawnPromoter">
+            <summary>
+            Provides a method for resolving which piece should a pawn be promoted into.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Boards.Board.RecentMoves">
+            <summary>
+            Stores the most recent moves for each side.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.#ctor(Chess.Application.BoardControllers.IPawnPromoter)">
+            <summary>
+            Creates an instance of <see cref="T:Chess.Application.Boards.Board"/>.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.ResetRecentMoves">
+            <summary>
+            Sets <see cref="P:Chess.Application.Boards.Board.RecentMoves"/> to null for each color.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.SetUpBoard">
+            <summary>
+            Sets up the chess board.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.MovePiece(Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
+            <summary>
+            Moves the piece on the board, removes the piece of opposing color if it is on the square.
+            </summary>
+            <param name="fromSquare"></param>
+            <param name="toSquare"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.MovePiece(Chess.Application.Boards.Square,Chess.Application.Boards.Square,System.Action{Chess.Application.Boards.Square,Chess.Application.Boards.Square})">
+            <summary>
+            Moves the piece on the board, removes the piece of opposing color if it is on the square.
+            </summary>
+            <param name="fromSquare"></param>
+            <param name="toSquare"></param>
+            <param name="moveSpecial"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.MovePiece(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square)">
+            <summary>
+            Moves the piece on the board, removes the piece of opposing color if it is on the square.
+            </summary>
+            <param name="piece"></param>
+            <param name="square"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.MovePiece(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square,System.Action{Chess.Application.Boards.Square,Chess.Application.Boards.Square})">
+            <summary>
+            Moves the piece on the board, removes the piece of opposing color if it is on the square.
+            Calls the <paramref name="moveSpecial"/> delegate for <see cref="T:Chess.Application.Pieces.King"/> castling.
+            </summary>
+            <param name="piece"></param>
+            <param name="square"></param>
+            <param name="moveSpecial"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.HandleAdditionalEvents(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square,Chess.Application.Enums.MoveType,System.Action{Chess.Application.Boards.Square,Chess.Application.Boards.Square})">
+            <summary>
+            Handles the internals of moving the piece - relocating on the chess board, pawn- or king-specific moves.
+            </summary>
+            <param name="piece"></param>
+            <param name="square"></param>
+            <param name="moveType"></param>
+            <param name="moveSpecial"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.SwitchNextMove">
+            <summary>
+            Switches the color representing the player on the move.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.CanDoEnPassant(Chess.Application.Pieces.Pawn)">
+            <summary>
+            Checks whether the given pawn can do en passant capture.
+            </summary>
+            <param name="pawn"></param>
+            <returns>Column offset determining to which side can the move be performed, 0 if it can't.</returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.EvaluateMove(Chess.Application.Enums.MoveType)">
+            <summary>
+            Evaluates current move and changes the associated <see cref="T:Chess.Application.Enums.MoveType"/> value.
+            </summary>
+            <param name="moveType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.MovePieceRaw(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square)">
+            <summary>
+            Moves a piece onto the new square without doing any checks.
+            </summary>
+            <param name="piece"></param>
+            <param name="square"></param>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.DoKingSpecialMoves(Chess.Application.Pieces.King,Chess.Application.Boards.Square,Chess.Application.Enums.MoveType,System.Action{Chess.Application.Boards.Square,Chess.Application.Boards.Square})">
+            <summary>
+            Handles special king movements.
+            </summary>
+            <param name="king"></param>
+            <param name="square"></param>
+            <param name="moveType"></param>
+            <param name="moveSpecial"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.KingCastlingMoveRook(Chess.Application.Boards.Square,Chess.Application.Enums.MoveType,System.Action{Chess.Application.Boards.Square,Chess.Application.Boards.Square})">
+            <summary>
+            Handles the rook movement during king's castling move.
+            </summary>
+            <param name="square"></param>
+            <param name="moveType"></param>
+            <param name="moveSpecial"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.DoPawnSpecialMoves(Chess.Application.Pieces.Pawn,Chess.Application.Boards.Square,Chess.Application.Enums.MoveType)">
+            <summary>
+            Handles special pawn movements.
+            </summary>
+            <param name="pawn"></param>
+            <param name="square"></param>
+            <param name="moveType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.DoPawnCapture(Chess.Application.Pieces.Pawn,Chess.Application.Boards.Square,Chess.Application.Enums.MoveType)">
+            <summary>
+            Handles standard capture and en passant capture by the <see cref="T:Chess.Application.Pieces.Pawn"/>.
+            </summary>
+            <param name="pawn"></param>
+            <param name="square"></param>
+            <param name="moveType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.PromotePawn(Chess.Application.Pieces.Pawn,Chess.Application.Boards.Square,Chess.Application.Enums.MoveType)">
+            <summary>
+            Handles pawn promotion logic.
+            </summary>
+            <param name="pawn"></param>
+            <param name="square"></param>
+            <param name="moveType"></param>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.IsProtectingKing(Chess.Application.Pieces.Piece,System.Collections.Generic.List{Chess.Application.Boards.Square}@)">
+            <summary>
+            Checks if the given piece is protecting its king against a single attacker and returns the path it would take.
+            Returns false if there is none, or more than one attacker.
+            </summary>
+            <param name="piece"></param>
+            <param name="squares"></param>
+            <returns>True if the piece is protecting its king, otherwise false.</returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.ValidMovesForPiece(Chess.Application.Boards.Square)">
+            <summary>
+            Calculates all the legal moves for the piece on the given coordinates.
+            </summary>
+            <param name="square"></param>
+            <returns>A list of all possible moves as <see cref="T:Chess.Application.Boards.Square"/>.</returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.ValidMovesForPiece(Chess.Application.Pieces.Piece)">
+            <summary>
+            Calculates all the legal moves for a given piece.
+            </summary>
+            <param name="piece"></param>
+            <returns>A list of all possible moves as <see cref="T:Chess.Application.Boards.Square"/>.</returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.IsSquareUnderAttack(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square)">
+            <summary>
+            Checks whether the given square is being attacked.
+            </summary>
+            <param name="piece"></param>
+            <param name="square"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.IsSquareUnderAttack(Chess.Application.Enums.PieceColor,Chess.Application.Boards.Square)">
+            <summary>
+            Checks whether the given square is being attacked.
+            </summary>
+            <param name="color"></param>
+            <param name="square"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.AddToLineOfAttack(Chess.Application.Boards.Square,Chess.Application.Pieces.Piece)">
+            <summary>
+            Adds squares between <paramref name="piece"/> and <paramref name="square"/> to <see cref="P:Chess.Application.Boards.Board.LineOfAttack"/>.
+            </summary>
+            <param name="square"></param>
+            <param name="piece"></param>
+        </member>
+        <member name="M:Chess.Application.Boards.Board.IsKingUnderAttack(Chess.Application.Enums.PieceColor)">
+            <summary>
+            Checks whether the king of the given color is under attack.
+            </summary>
+            <param name="color"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Chess.Application.Boards.IBoard">
+            <summary>
+            Represents the chessboard. Provides read access to pieces on the board and a collection of coordinates that are under attack per piece.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Boards.IBoard.Item(Chess.Application.Boards.Square)">
+            <summary>
+            Provides a read-only access to the item on the given coordinates.
+            </summary>
+            <param name="square"></param>
+            <returns>The piece on the given coordinates.</returns>
+        </member>
+        <member name="P:Chess.Application.Boards.IBoard.LineOfAttack">
+            <summary>
+            Keeps a reference for all pieces attacking the king of the opposite color and the paths they attack the king on.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Boards.IBoard.SetUpBoard">
+            <summary>
+            Sets up the provided board.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Boards.IBoard.NextMove">
+            <summary>
+            Represents the color that is currently on the move.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Boards.IBoard.Winner">
+            <summary>
+            Represents the winner of the game.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Boards.IBoard.LivePieces">
+            <summary>
+            Keeps a reference for all the pieces on the board by color.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Boards.IBoard.MovePiece(Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
+            <summary>
+            Moves the given piece to the given square. Handles the encompassing aspects.
+            </summary>
+            <param name="fromSquare"></param>
+            <param name="toSquare"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Chess.Application.Boards.IBoard.MovePiece(Chess.Application.Boards.Square,Chess.Application.Boards.Square,System.Action{Chess.Application.Boards.Square,Chess.Application.Boards.Square})">
+            <summary>
+            Moves the given piece to the given square. Handles the encompassing aspects.
+            </summary>
+            <param name="fromSquare"></param>
+            <param name="toSquare"></param>
+            <param name="moveSpecial"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Chess.Application.Boards.IBoard.MovePiece(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square)">
+            <summary>
+            Moves the piece on the board, removes the piece of opposing color if it is on the square.
+            </summary>
+            <param name="piece"></param>
+            <param name="square"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Chess.Application.Boards.IBoard.MovePiece(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square,System.Action{Chess.Application.Boards.Square,Chess.Application.Boards.Square})">
+            <summary>
+            Moves the piece on the board, removes the piece of opposing color if it is on the square.
+            Calls the <paramref name="moveFromTo"/> delegate for <see cref="T:Chess.Application.Pieces.Rook"/> movement during <see cref="T:Chess.Application.Pieces.King"/> castling.
+            </summary>
+            <param name="piece"></param>
+            <param name="square"></param>
+            <param name="moveFromTo"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Chess.Application.Boards.IBoard.IsProtectingKing(Chess.Application.Pieces.Piece,System.Collections.Generic.List{Chess.Application.Boards.Square}@)">
+            <summary>
+            Checks if the given piece is protecting its king against a single attacker and returns the path it would take.
+            Returns false if there is none, or more than one attacker.
+            </summary>
+            <param name="piece"></param>
+            <param name="squares"></param>
+            <returns>True if the piece is protecting its king, otherwise false.</returns>
+        </member>
+        <member name="M:Chess.Application.Boards.IBoard.ValidMovesForPiece(Chess.Application.Boards.Square)">
+            <summary>
+            Calculates all the legal moves for the piece on the given coordinates.
+            </summary>
+            <param name="square"></param>
+            <returns>A list of all possible moves as <see cref="T:Chess.Application.Boards.Square"/>.</returns>
+        </member>
+        <member name="M:Chess.Application.Boards.IBoard.ValidMovesForPiece(Chess.Application.Pieces.Piece)">
+            <summary>
+            Calculates all the legal moves for a given piece.
+            </summary>
+            <param name="piece"></param>
+            <returns>A list of all possible moves as <see cref="T:Chess.Application.Boards.Square"/>.</returns>
+        </member>
+        <member name="P:Chess.Application.Boards.IBoard.Kings">
+            <summary>
+            Keeps a reference for both kings on the board by color.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Boards.IBoard.IsSquareUnderAttack(Chess.Application.Enums.PieceColor,Chess.Application.Boards.Square)">
+            <summary>
+            Checks whether the given square is being attacked.
+            </summary>
+            <param name="color"></param>
+            <param name="square"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.Boards.IBoard.IsSquareUnderAttack(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square)">
+            <summary>
+            Checks whether the given square is being attacked.
+            </summary>
+            <param name="piece"></param>
+            <param name="square"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.Boards.IBoard.IsKingUnderAttack(Chess.Application.Enums.PieceColor)">
+            <summary>
+            Checks whether the king of the given color is under attack.
+            </summary>
+            <param name="color"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.Boards.IBoard.CanDoEnPassant(Chess.Application.Pieces.Pawn)">
+            <summary>
+            Checks whether the given pawn can do en passant capture.
+            </summary>
+            <param name="pawn"></param>
+            <returns>Column offset determining to which side can the move be performed, 0 if it can't.</returns>
+        </member>
+        <member name="T:Chess.Application.Boards.InvalidPieceException">
+            <summary>
+            Exception that is thrown when an invalid value is received for pawn promotion.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Boards.InvalidPieceException.#ctor">
+            <summary>
+            Throws a new <see cref="T:Chess.Application.Boards.InvalidPieceException"/>.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Boards.InvalidPieceException.#ctor(System.String)">
+            <summary>
+            Throws a new <see cref="T:Chess.Application.Boards.InvalidPieceException"/> with <paramref name="message"/>.
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Chess.Application.Boards.InvalidPieceException.#ctor(System.String,System.Exception)">
+            <summary>
+            Throws a new <see cref="T:Chess.Application.Boards.InvalidPieceException"/> with <paramref name="message"/> and <paramref name="innerException"/>.
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="T:Chess.Application.Boards.MoveData">
+            <summary>
+            Represents a single move as a point of origin, target, and any special events, that have happened during.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Boards.MoveData.FromSquare">
+            <summary>
+            Represents the point of origin.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Boards.MoveData.ToSquare">
+            <summary>
+            Represents the target square of the move.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Boards.MoveData.#ctor(Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
+            <summary>
+            Creates a new instance of the <see cref="T:Chess.Application.Boards.MoveData"/>.
+            </summary>
+            <param name="fromSquare"></param>
+            <param name="toSquare"></param>
+        </member>
+        <member name="M:Chess.Application.Boards.MoveData.op_Implicit(System.ValueTuple{Chess.Application.Boards.Square,Chess.Application.Boards.Square})~Chess.Application.Boards.MoveData">
+            <summary>
+            Implicit cast from (<see cref="T:Chess.Application.Boards.Square"/>, <see cref="T:Chess.Application.Boards.Square"/>.
+            </summary>
+            <param name="tuple"></param>
+        </member>
+        <member name="T:Chess.Application.Boards.MoveVector">
+            <summary>
+            Represents the direct path between two given <see cref="T:Chess.Application.Boards.Square"/> instances.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Boards.MoveVector.Square1">
+            <summary>
+            Represents the starting <see cref="T:Chess.Application.Boards.Square"/>.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Boards.MoveVector.Square2">
+            <summary>
+            Represents the end <see cref="T:Chess.Application.Boards.Square"/>.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Boards.MoveVector.#ctor(Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
+            <summary>
+            Creates an instance of <see cref="T:Chess.Application.Boards.MoveVector"/>.
+            </summary>
+            <param name="square1"></param>
+            <param name="square2"></param>
+        </member>
+        <member name="M:Chess.Application.Boards.MoveVector.ReduceNumber(System.Int32)">
+            <summary>
+            Reduces the given number to -1, 0, or 1 based on the <paramref name="number"/> value.
+            </summary>
+            <param name="number"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.Boards.MoveVector.GetSquares">
+            <summary>
+            Returns a list of squares between the two instances of <see cref="T:Chess.Application.Boards.Square"/> passed to constructor.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.Boards.MoveVector.GetSquares(Chess.Application.Enums.MoveVectorDirection)">
+            <summary>
+            Returns a list of squares between the two instances of <see cref="T:Chess.Application.Boards.Square"/> passed to constructor in the given direction.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.Boards.MoveVector.SquaresAreAdjacent">
+            <summary>
+            Checks if the given squares are lying next to each other.
+            </summary>
+            <returns>True if the given squares are adjacent.</returns>
+        </member>
+        <member name="M:Chess.Application.Boards.MoveVector.SquaresHaveDirectPath">
+            <summary>
+            Checks if the given squares have a direct path.
+            </summary>
+            <returns>True if the given squares have a direct path.</returns>
+        </member>
+        <member name="M:Chess.Application.Boards.MoveVector.SquaresHaveDirectPath(Chess.Application.Enums.MoveVectorDirection)">
+            <summary>
+            Checks if the given squares have a direct path in the given direction.
+            </summary>
+            <param name="direction"></param>
+            <returns>True if the given squares have a direct path.</returns>
+        </member>
+        <member name="T:Chess.Application.Boards.Square">
+            <summary>
+            Represents a single coordinate on the chessboard. Allows for implicit conversion from (int row, int column) to <see cref="T:Chess.Application.Boards.Square"/>.
+            Disallows invalid row and column values.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Boards.Square.Row">
+            <summary>
+            Represents the row of the coordinate as index from the top.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Boards.Square.Column">
+            <summary>
+            Represents the column of the coordinate as index from the left.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Boards.Square.MinValue">
+            <summary>
+            Minimum acceptable value for <see cref="T:Chess.Application.Boards.Square"/> properties.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Boards.Square.MaxValue">
+            <summary>
+            Maximum acceptable value for <see cref="T:Chess.Application.Boards.Square"/> properties.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Boards.Square.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Creates an instance of the Square struct.
+            </summary>
+            <param name="row"></param>
+            <param name="column"></param>
+        </member>
+        <member name="M:Chess.Application.Boards.Square.op_Implicit(System.ValueTuple{System.Int32,System.Int32})~Chess.Application.Boards.Square">
+            <summary>
+            Implicit cast from (<see cref="T:System.Int32"/>, <see cref="T:System.Int32"/>) to <see cref="T:Chess.Application.Boards.Square"/>.
+            </summary>
+            <param name="tuple"></param>
+        </member>
+        <member name="M:Chess.Application.Boards.Square.op_Explicit(Chess.Application.Boards.Square)~System.ValueTuple{System.Int32,System.Int32}">
+            <summary>
+            Explicit cast from (<see cref="T:System.Int32"/>, <see cref="T:System.Int32"/>) to <see cref="T:Chess.Application.Boards.Square"/>.
+            </summary>
+            <param name="square"></param>
+        </member>
+        <member name="M:Chess.Application.Boards.Square.op_Addition(Chess.Application.Boards.Square,System.ValueTuple{System.Int32,System.Int32})">
+            <summary>
+            Provides sum operation between two instances of <see cref="T:Chess.Application.Boards.Square"/> or (<see cref="T:System.Int32"/>, <see cref="T:System.Int32"/>).
+            </summary>
+            <param name="square1"></param>
+            <param name="tuple"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Square.op_Addition(Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
+            <summary>
+            Provides sum operation between two instances of <see cref="T:Chess.Application.Boards.Square"/> or (<see cref="T:System.Int32"/>, <see cref="T:System.Int32"/>) where applicable.
+            </summary>
+            <param name="square1"></param>
+            <param name="square2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Square.op_Subtraction(Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
+            <summary>
+            Provides subtraction operation between two instances of <see cref="T:Chess.Application.Boards.Square"/> or (<see cref="T:System.Int32"/>, <see cref="T:System.Int32"/>) where applicable.
+            </summary>
+            <param name="square1"></param>
+            <param name="square2"></param>
+            <returns><see cref="T:Chess.Application.Boards.MoveVector"/> instance.</returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Square.op_Equality(Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
+            <summary>
+            Provides equality check between two instances of <see cref="T:Chess.Application.Boards.Square"/> or (<see cref="T:System.Int32"/>, <see cref="T:System.Int32"/>) where applicable.
+            </summary>
+            <param name="point1"></param>
+            <param name="point2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Square.op_Inequality(Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
+            <summary>
+            Provides inequality check between two instances of <see cref="T:Chess.Application.Boards.Square"/> or (<see cref="T:System.Int32"/>, <see cref="T:System.Int32"/>) where applicable.
+            </summary>
+            <param name="square1"></param>
+            <param name="square2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Square.IsValid(System.ValueTuple{System.Int32,System.Int32})">
+            <summary>
+            Checks whether the coordinates as (<see cref="T:System.Int32"/>, <see cref="T:System.Int32"/>) are a part of the board.
+            </summary>
+            <param name="tuple"></param>
+            <returns>True if the coordinates are a part of the board.</returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Square.IsValid(System.Int32,System.Int32)">
+            <summary>
+            Checks whether the coordinates are a part of the board.
+            </summary>
+            <param name="row"></param>
+            <param name="column"></param>
+            <returns>True if the coordinates are a part of the board.</returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Square.TryCreate(System.ValueTuple{System.Int32,System.Int32},System.Nullable{Chess.Application.Boards.Square}@)">
+            <summary>
+            Attempts to create a <see cref="T:Chess.Application.Boards.Square"/> and returns it as an out <paramref name="square"/>. If parameters are not valid, returns it as null.
+            </summary>
+            <param name="tuple"></param>
+            <param name="square"></param>
+            <returns>True if parameters are valid, false if not.</returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Square.TryCreate(System.Int32,System.Int32,System.Nullable{Chess.Application.Boards.Square}@)">
+            <summary>
+            Attempts to create a <see cref="T:Chess.Application.Boards.Square"/> and returns it as an out <paramref name="square"/>. If parameters are not valid, returns it as null.
+            </summary>
+            <param name="row"></param>
+            <param name="column"></param>
+            <param name="square"></param>
+            <returns>True if parameters are valid, false if not.</returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Square.Equals(System.Object)">
+            <summary>
+            Provides equality check between two instances of <see cref="T:Chess.Application.Boards.Square"/> or (<see cref="T:System.Int32"/>, <see cref="T:System.Int32"/>).
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Square.GetHashCode">
+            <summary>
+            Overrides <see cref="M:System.Object.GetHashCode"/> for <see cref="T:Chess.Application.Boards.Square"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.Boards.Square.ToString">
+            <summary>
+            Overrides <see cref="M:System.Object.ToString"/> for <see cref="T:Chess.Application.Boards.Square"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Chess.Application.ChessAIs.ChessAI">
+            <summary>
+            Class representing a chess AI that can play against the user.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.ChessAIs.ChessAI.Controller">
+            <summary>
+            Provides a reference to the <see cref="T:Chess.Application.BoardControllers.IBoardController"/> object that is used to run the game.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.ChessAIs.ChessAI.Board">
+            <summary>
+            Own copy of the chessboard used to calculate the moves.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.ChessAIs.ChessAI.ColorOfAI">
+            <summary>
+            Represents the color the AI is playing as.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.ChessAIs.ChessAI.Root">
+            <summary>
+            Represents the possible moves in the current situation.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.ChessAIs.ChessAI.CalculateMovesAhead">
+            <summary>
+            Represents how far ahead will the AI calculate the moves.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.ChessAIs.ChessAI.PieceWeights">
+            <summary>
+            Represents the weights of each piece.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.ChessAI.#ctor(Chess.Application.Enums.PieceColor,Chess.Application.BoardControllers.IBoardController)">
+            <summary>
+            Creates an instance of the <see cref="T:Chess.Application.ChessAIs.ChessAI"/> class.
+            </summary>
+            <param name="color"></param>
+            <param name="board"></param>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.ChessAI.DoNextMove">
+            <summary>
+            Makes the next move by the <see cref="T:Chess.Application.ChessAIs.ChessAI"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.ChessAI.OppositeColor(Chess.Application.Enums.PieceColor)">
+            <summary>
+            Returns color opposite to the one passed as argument.
+            </summary>
+            <param name="color"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.ChessAI.RegisterEnemyMove(Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
+            <summary>
+            Registers a move made by the opponent.
+            </summary>
+            <param name="fromSquare"></param>
+            <param name="toSquare"></param>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.ChessAI.GetBestMove">
+            <summary>
+            Returns the best possible move the AI has identified.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.ChessAI.BuildMovesTree">
+            <summary>
+            Builds the moves tree as a list of <see cref="T:Chess.Application.ChessAIs.Moves.MoveEvaluator"/> instances.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.ChessAI.BuildMovesTreeLevel(System.Int32,System.Collections.Generic.List{Chess.Application.ChessAIs.Moves.MoveEvaluator})">
+            <summary>
+            Constructs moves tree levels recursively, up to the highest possible depth given by <see cref="P:Chess.Application.ChessAIs.ChessAI.CalculateMovesAhead"/>.
+            </summary>
+            <param name="level"></param>
+            <param name="moveEvals"></param>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.ChessAI.FillMovesTree">
+            <summary>
+            Fills the tree after a move has been made.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.ChessAI.FillMovesTreeLevel(System.Int32,System.Collections.Generic.List{Chess.Application.ChessAIs.Moves.MoveEvaluator})">
+            <summary>
+            Fills moves tree levels recursively, up to the highest possible depth given by <see cref="P:Chess.Application.ChessAIs.ChessAI.CalculateMovesAhead"/>.
+            </summary>
+            <param name="level"></param>
+            <param name="moveEvals"></param>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.ChessAI.ScoreMove(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square)">
+            <summary>
+            Evaluates a given move based on weights associated with the square, and type of piece currently occupying it, if any.
+            </summary>
+            <param name="piece"></param>
+            <param name="square"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.ChessAI.MaterialDifference(Chess.Application.Boards.Square)">
+            <summary>
+            Calculates the difference in material as <see cref="T:System.Double"/>.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.ChessAI.IsCheckMate">
+            <summary>
+            The move results in check mate - opponent's king is under attack and no piece can move in to protect it.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.ChessAI.GetPromotedPiece">
+            <summary>
+            Resolves which piece should a pawn be promoted into.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.ChessAI.SetUpNonstandardBoard(Chess.Application.Boards.IBoard)">
+            <summary>
+            Sets up a board with a non-standard piece layout, e.g. a specific positions. Copies the given <see cref="T:Chess.Application.Boards.IBoard"/> instance's piece positions.
+            </summary>
+        </member>
+        <member name="T:Chess.Application.ChessAIs.IChessAI">
+            <summary>
+            Specifies methods a chess AI needs to implement.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.ChessAIs.IChessAI.ColorOfAI">
+            <summary>
+            Represents the color the AI is playing as.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.IChessAI.DoNextMove">
+            <summary>
+            Returns the next move by the <see cref="T:Chess.Application.ChessAIs.IChessAI"/>. 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.IChessAI.RegisterEnemyMove(Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
+            <summary>
+            Registers a move made by the opponent.
+            </summary>
+            <param name="fromSquare"></param>
+            <param name="toSquare"></param>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.IChessAI.SetUpNonstandardBoard(Chess.Application.Boards.IBoard)">
+            <summary>
+            Sets up a board with a non-standard piece layout, e.g. a specific positions. Copies the given <see cref="T:Chess.Application.Boards.IBoard"/> instance's piece positions.
+            </summary>
+        </member>
+        <member name="T:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal">
+            <summary>
+            Extends the <see cref="T:Chess.Application.Boards.Board"/> with the ability to reverse a given move.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.#ctor(Chess.Application.BoardControllers.IPawnPromoter)">
+            <summary>
+            Creates an instance of <see cref="T:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal"/> class.
+            </summary>
+            <param name="pawnPromoter"></param>
+        </member>
+        <member name="P:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.MovesStack">
+            <summary>
+            Stores recent moves in a stack, each moves is added on top of the stack,
+            with each reversal the topmost one is removed and stored in the <see cref="P:Chess.Application.Boards.Board.RecentMoves"/>.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.MovePiece(Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
+            <summary>
+            Moves the piece on the board, removes the piece of opposing color if it is on the square.
+            </summary>
+            <param name="fromSquare"></param>
+            <param name="toSquare"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.MovePiece(Chess.Application.Boards.Square,Chess.Application.Boards.Square,System.Action{Chess.Application.Boards.Square,Chess.Application.Boards.Square})">
+            <summary>
+            Moves the piece on the board, removes the piece of opposing color if it is on the square.
+            </summary>
+            <param name="fromSquare"></param>
+            <param name="toSquare"></param>
+            <param name="moveSpecial"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.MovePiece(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square)">
+            <summary>
+            Moves the piece on the board, removes the piece of opposing color if it is on the square.
+            </summary>
+            <param name="piece"></param>
+            <param name="square"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.MovePiece(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square,System.Action{Chess.Application.Boards.Square,Chess.Application.Boards.Square})">
+            <summary>
+            Moves the piece on the board, removes the piece of opposing color if it is on the square. Calls the <paramref name="moveSpecial"/> delegate.
+            </summary>
+            <param name="piece"></param>
+            <param name="square"></param>
+            <param name="moveSpecial"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.GetBackup(Chess.Application.Boards.MoveData)">
+            <summary>
+            Returns piece that will be captured during the current move.
+            </summary>
+            <param name="move"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.IsPawnDoingEnPassantCapture(Chess.Application.Boards.MoveData)">
+            <summary>
+            Checks if the current piece is a <see cref="T:Chess.Application.Pieces.Pawn"/> and is doing an en passant capture.
+            </summary>
+            <param name="move"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.ReverseLastMove">
+            <summary>
+            Reverses the most recent move.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.ReversePawnPromotion(Chess.Application.Boards.MoveData,Chess.Application.Pieces.Piece)">
+            <summary>
+            Reverses pawn promotion - removes promoted piece, reinstates pawn.
+            Throws <see cref="T:System.InvalidOperationException"/> if <paramref name="piece"/> is not <see cref="T:Chess.Application.Pieces.Pawn"/>.
+            </summary>
+            <param name="moveData"></param>
+            <param name="piece"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.ReverseCastling(Chess.Application.Boards.Square)">
+            <summary>
+            Moves appropriate rook back to its original square when reversing a castling move.
+            </summary>
+            <param name="toSquare"></param>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.IsCastlingKing(Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
+            <summary>
+            Checks if the current piece is a <see cref="T:Chess.Application.Pieces.King"/> and is castling.
+            </summary>
+            <param name="fromSquare"></param>
+            <param name="toSquare"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.SetUpNonstandardBoard(Chess.Application.Boards.IBoard)">
+            <summary>
+            Mirrors a given <see cref="T:Chess.Application.Boards.IBoard"/> piece positions.
+            </summary>
+            <param name="board"></param>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.InjectPiece(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square)">
+            <summary>
+            Adds a piece of the same type as <paramref name="piece"/> to the given square.
+            </summary>
+            <param name="piece"></param>
+            <param name="square"></param>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.ThrowIfKingIsAlreadyAssigned(Chess.Application.Pieces.Piece)">
+            <summary>
+            Makes sure that no more than one <see cref="T:Chess.Application.Pieces.King"/> is present on the chessboard.
+            </summary>
+            <param name="piece"></param>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.GetPiece(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square)">
+            <summary>
+            Returns a new instance of the same class as the given <paramref name="piece"/>.
+            </summary>
+            <param name="piece"></param>
+            <param name="square"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Chess.Application.ChessAIs.Extensions.IBoardWithMoveReversal">
+            <summary>
+            Extends the <see cref="T:Chess.Application.Boards.IBoard"/> with the ability to reverse a given move.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.IBoardWithMoveReversal.ReverseLastMove">
+            <summary>
+            Reverses the most recent move.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.IBoardWithMoveReversal.SetUpNonstandardBoard(Chess.Application.Boards.IBoard)">
+            <summary>
+            Mirrors a given <see cref="T:Chess.Application.Boards.IBoard"/> piece positions.
+            </summary>
+            <param name="board"></param>
+        </member>
+        <member name="T:Chess.Application.ChessAIs.Extensions.LinqExtensions">
+            <summary>
+            Extension methods for Linq.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.LinqExtensions.MaxBy``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Double})">
+            <summary>
+            Returns the largest <typeparamref name="T"/> item from a collection of <typeparamref name="T"/> based on value taken by the <paramref name="selector"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="collection"></param>
+            <param name="selector"></param>
+            <returns><typeparamref name="T"/> or null if the collection is empty</returns>
+        </member>
+        <member name="T:Chess.Application.ChessAIs.Extensions.PieceExtensions">
+            <summary>
+            Extension methods for <see cref="T:Chess.Application.Pieces.Piece"/>.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.PieceExtensions.IsThreateningSquare(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
+            <summary>
+            Checks whether the <paramref name="piece"/> would be attacking <paramref name="whichSquare"/>
+            if it were located on <paramref name="fromSquare"/>.
+            </summary>
+            <param name="piece"></param>
+            <param name="fromSquare"></param>
+            <param name="whichSquare"></param>
+            <returns>True if the piece would be attacking a given square, otherwise false.</returns>
+        </member>
+        <member name="T:Chess.Application.ChessAIs.Moves.MoveEvaluator">
+            <summary>
+            Represents a single move with a list of possible moves that can follow it.
+            Keeps a score for itself and subsequent moves that is used for evaluation.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.ChessAIs.Moves.MoveEvaluator.FromSquare">
+            <summary>
+            Represents the row of the coordinate as index from the top.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.ChessAIs.Moves.MoveEvaluator.ToSquare">
+            <summary>
+            Represents the column of the coordinate as index from the left.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.ChessAIs.Moves.MoveEvaluator.Score">
+            <summary>
+            Represents the numerical score of the move for evaluation.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.ChessAIs.Moves.MoveEvaluator.MoveData">
+            <summary>
+            Represents the starting square of the move, the end square, and events.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.ChessAIs.Moves.MoveEvaluator.NextMoves">
+            <summary>
+            Represents the possible moves that can follow this move.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Moves.MoveEvaluator.#ctor(Chess.Application.Boards.MoveData,System.Double)">
+            <summary>
+            Creates an instance of the <see cref="T:Chess.Application.ChessAIs.Moves.MoveEvaluator"/>.
+            </summary>
+            <param name="moveData"></param>
+            <param name="score"></param>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Moves.MoveEvaluator.#ctor(Chess.Application.Boards.Square,Chess.Application.Boards.Square,System.Double)">
+            <summary>
+            Creates an instance of the <see cref="T:Chess.Application.ChessAIs.Moves.MoveEvaluator"/>.
+            </summary>
+            <param name="fromSquare"></param>
+            <param name="toSquare"></param>
+            <param name="score"></param>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Moves.MoveEvaluator.SetScore(System.Double)">
+            <summary>
+            Changes the <see cref="P:Chess.Application.ChessAIs.Moves.MoveEvaluator.Score"/> to <paramref name="newScore"/>.
+            </summary>
+            <param name="newScore"></param>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Moves.MoveEvaluator.GetScore(System.Boolean)">
+            <summary>
+            Provides a hypothetical score for the move and all the possible best moves following it.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Moves.MoveEvaluator.AddMove(Chess.Application.Boards.Square,Chess.Application.Boards.Square,System.Double)">
+            <summary>
+            Registers a move following this one.
+            </summary>
+            <param name="startSquare"></param>
+            <param name="endSquare"></param>
+            <param name="score"></param>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Moves.MoveEvaluator.AddMove(Chess.Application.ChessAIs.Moves.MoveEvaluator)">
+            <summary>
+            Registers a move following this one.
+            </summary>
+            <param name="move"></param>
+        </member>
+        <member name="T:Chess.Application.ChessAIs.Weights.ChessWeights">
+            <summary>
+            Provides weights for move comparison.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.ChessAIs.Weights.ChessWeights.PieceWeights">
+            <summary>
+            Provides the weight of the pieces used in the calculation of the moves.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.ChessAIs.Weights.ChessWeights.PawnWeights">
+            <summary>
+            Provides square weights for pawns.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.ChessAIs.Weights.ChessWeights.BishopWeights">
+            <summary>
+            Provides square weights for bishops.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.ChessAIs.Weights.ChessWeights.KnightWeights">
+            <summary>
+            Provides square weights for knights.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.ChessAIs.Weights.ChessWeights.RookWeights">
+            <summary>
+            Provides square weights for rooks.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.ChessAIs.Weights.ChessWeights.QueenWeights">
+            <summary>
+            Provides square weights for queens.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.ChessAIs.Weights.ChessWeights.KingWeights">
+            <summary>
+            Provides square weights for king.
+            </summary>
+        </member>
+        <member name="T:Chess.Application.Enums.CaptureMode">
+            <summary>
+            This is used to ensure pawns are blocked when they should be, and require a piece of opposite color to capture diagonally.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.CaptureMode.All">
+            <summary>
+            Piece can move to a square if it is unoccupied or occupied by a piece of the opposing color.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.CaptureMode.NoCapture">
+            <summary>
+            Piece can only move to an unoccupied square - used by pawns.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.CaptureMode.CaptureOnly">
+            <summary>
+            Piece can only move to a square occupied by a piece of the opposing color - used by pawns.
+            </summary>
+        </member>
+        <member name="T:Chess.Application.Enums.GameResultEnum">
+            <summary>
+            Represents the winner of the game.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.GameResultEnum.White">
+            <summary>
+            White wins.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.GameResultEnum.Black">
+            <summary>
+            Black wins.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.GameResultEnum.Draw">
+            <summary>
+            Game ended in draw.
+            </summary>
+        </member>
+        <member name="T:Chess.Application.Enums.MoveType">
+            <summary>
+            This is used to capture additional characteristics of a given move -
+            whether a check was made, piece captured etc.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.MoveType.Normal">
+            <summary>
+            Nothing noteworthy has happened.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.MoveType.Capture">
+            <summary>
+            A piece was captured during the move.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.MoveType.EnPassantCapture">
+            <summary>
+            A pawn was captured by the En Passant move.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.MoveType.QueensideCastling">
+            <summary>
+            King has castled to the Queen's side.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.MoveType.KingsideCastling">
+            <summary>
+            King has castled to the King's side.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.MoveType.Check">
+            <summary>
+            The move resulted in a check.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.MoveType.CheckMate">
+            <summary>
+            The move resulted in a checkmate.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.MoveType.Draw">
+            <summary>
+            The move resulted in a draw.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.MoveType.PawnPromotion">
+            <summary>
+            A pawn was promoted.
+            </summary>
+        </member>
+        <member name="T:Chess.Application.Enums.MoveVectorDirection">
+            <summary>
+            Specifies the direction a vector can have, i.e. either diagonal, or horizontal/vertical, or both.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.MoveVectorDirection.Regular">
+            <summary>
+            Vector can have only horizontal or vertical direction.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.MoveVectorDirection.Diagonal">
+            <summary>
+            Vector can have only diagonal direction.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.MoveVectorDirection.All">
+            <summary>
+            Vector is not limited in which direction it can have.
+            </summary>
+        </member>
+        <member name="T:Chess.Application.Enums.PieceColor">
+            <summary>
+            Denotes Piece color, is also used to ensure pawns move only in the proper direction (up or down based on color).
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.PieceColor.White">
+            <summary>
+            White piece color, white pawns move down (row index decreases).
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.PieceColor.Black">
+            <summary>
+            Black piece color, black pawns move down (row index increases).
+            </summary>
+        </member>
+        <member name="T:Chess.Application.Enums.PromotedPiece">
+            <summary>
+            Used during pawn promotion to return the type of piece the user wants the pawn to be promoted into.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.PromotedPiece.Queen">
+            <summary>
+            Indicates the user has selected the Queen.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.PromotedPiece.Rook">
+            <summary>
+            Indicates the user has selected the Rook.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.PromotedPiece.Bishop">
+            <summary>
+            Indicates the user has selected the Bishop.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.PromotedPiece.Knight">
+            <summary>
+            Indicates the user has selected the Knight.
+            </summary>
+        </member>
+        <member name="F:Chess.Application.Enums.PromotedPiece.None">
+            <summary>
+            Indicates the user has not yet selected a piece.
+            </summary>
+        </member>
+        <member name="T:Chess.Application.Pieces.Bishop">
+            <summary>
+            Class that represents the Bishop piece on the chessboard. Provides movement typical for Bishops.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Pieces.Bishop.#ctor(Chess.Application.Enums.PieceColor,Chess.Application.Boards.Square,Chess.Application.Boards.IBoard)">
+            <summary>
+            Creates an instance of the Bishop class.
+            </summary>
+            <param name="color"></param>
+            <param name="square"></param>
+            <param name="board"></param>
+        </member>
+        <member name="M:Chess.Application.Pieces.Bishop.GetPossibleMoves">
+            <summary>
+            Override method, calculates all possible moves for a given piece.
+            </summary>
+            <returns>A list of all possible moves as <see cref="T:Chess.Application.Boards.Square"/>.</returns>
+        </member>
+        <member name="M:Chess.Application.Pieces.Bishop.BishopPossibleMoves(Chess.Application.Pieces.Piece)">
+            <summary>
+            Static method that calculates all moves a bishop can make if put into the position of the piece given as an argument.
+            Calculates the moves for Bishop and Queen.
+            </summary>
+            <param name="piece"></param>
+            <returns>A list of all possible moves as <see cref="T:Chess.Application.Boards.Square"/>.</returns>
+        </member>
+        <member name="M:Chess.Application.Pieces.Bishop.IsThreateningSquare(Chess.Application.Boards.Square)">
+            <summary>
+            Checks whether the piece is attacking a given square to put restraints on king and other piece movements.
+            </summary>
+            <param name="otherSquare"></param>
+            <returns>True if the piece is attacking a given square, otherwise false.</returns>
+        </member>
+        <member name="M:Chess.Application.Pieces.Bishop.IsThreateningSquare(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square)">
+            <summary>
+            Checks whether the piece is attacking a given square to put restraints on king and other piece movements.
+            </summary>
+            <param name="piece"></param>
+            <param name="otherSquare"></param>
+            <returns>True if the piece is attacking a given square, otherwise false.</returns>
+        </member>
+        <member name="T:Chess.Application.Pieces.King">
+            <summary>
+            Class that represents the Bishop piece on the chessboard. Provides movement typical for Kings.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Pieces.King.IsUnderAttack">
+            <summary>
+            Provides a quick check whether the king is currently being attacked by pieces of opposing color.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Pieces.King.#ctor(Chess.Application.Enums.PieceColor,Chess.Application.Boards.Square,Chess.Application.Boards.IBoard)">
+            <summary>
+            Creates an instance of the King class.
+            </summary>
+            <param name="color"></param>
+            <param name="square"></param>
+            <param name="board"></param>
+        </member>
+        <member name="M:Chess.Application.Pieces.King.GetPossibleMoves">
+            <summary>
+            Override method, calculates all possible moves for a given piece.
+            </summary>
+            <returns>A list of all possible moves as <see cref="T:Chess.Application.Boards.Square"/>.</returns>
+        </member>
+        <member name="M:Chess.Application.Pieces.King.CheckForCastlingOpportunities">
+            <summary>
+            Checks whether the king can castle to either side
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Pieces.King.CastlingPossibleForSquare(Chess.Application.Boards.Square)">
+            <summary>
+            Checks if the king can castle through the given square.
+            </summary>
+            <param name="square"></param>
+            <returns>True if can castle through the given square, otherwise false.</returns>
+        </member>
+        <member name="M:Chess.Application.Pieces.King.IsSquareUnderAttack(Chess.Application.Boards.Square)">
+            <summary>
+            Checks whether the given square is being attacked
+            </summary>
+            <param name="square"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.Pieces.King.CheckIsUnderAttack">
+            <summary>
+            Checks whether the king is being attacked and sets the <see cref="P:Chess.Application.Pieces.King.IsUnderAttack"/> to true if yes.
+            </summary>
+            <returns>True if the king is being attacked, otherwise false.</returns>
+        </member>
+        <member name="M:Chess.Application.Pieces.King.IsThreateningSquare(Chess.Application.Boards.Square)">
+            <summary>
+            Checks whether the piece is attacking a given square to put restraints on king and other piece movements.
+            </summary>
+            <param name="otherSquare"></param>
+            <returns>True if the piece is attacking a given square, otherwise false.</returns>
+        </member>
+        <member name="T:Chess.Application.Pieces.Knight">
+            <summary>
+            Class that represents the Knight piece on the chessboard. Provides movement typical for Knights.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Pieces.Knight.#ctor(Chess.Application.Enums.PieceColor,Chess.Application.Boards.Square,Chess.Application.Boards.IBoard)">
+            <summary>
+            Creates an instance of the Knight class.
+            </summary>
+            <param name="color"></param>
+            <param name="square"></param>
+            <param name="board"></param>
+        </member>
+        <member name="M:Chess.Application.Pieces.Knight.GetPossibleMoves">
+            <summary>
+            Override method, calculates all possible moves for a given piece.
+            </summary>
+            <returns>A list of all possible moves as <see cref="T:Chess.Application.Boards.Square"/>.</returns>
+        </member>
+        <member name="M:Chess.Application.Pieces.Knight.IsThreateningSquare(Chess.Application.Boards.Square)">
+            <summary>
+            Checks whether the piece is attacking a given square to put restraints on king and other piece movements.
+            </summary>
+            <param name="otherSquare"></param>
+            <returns>True if the piece is attacking a given square, otherwise false.</returns>
+        </member>
+        <member name="T:Chess.Application.Pieces.Pawn">
+            <summary>
+            Class that represents the Pawn pieces on the chessboard. Provides movement typical for Pawns.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Pieces.Pawn.#ctor(Chess.Application.Enums.PieceColor,Chess.Application.Boards.Square,Chess.Application.Boards.IBoard)">
+            <summary>
+            Creates an instance of the Pawn class.
+            </summary>
+            <param name="color"></param>
+            <param name="square"></param>
+            <param name="board"></param>
+        </member>
+        <member name="M:Chess.Application.Pieces.Pawn.GetPossibleMoves">
+            <summary>
+            Override method, calculates all possible moves for a given piece.
+            </summary>
+            <returns>A list of all possible moves as <see cref="T:Chess.Application.Boards.Square"/>.</returns>
+        </member>
+        <member name="M:Chess.Application.Pieces.Pawn.IsThreateningSquare(Chess.Application.Boards.Square)">
+            <summary>
+            Checks whether the piece is attacking a given square to put restraints on king and other piece movements.
+            </summary>
+            <param name="otherSquare"></param>
+            <returns>True if the piece is attacking a given square, otherwise false.</returns>
+        </member>
+        <member name="T:Chess.Application.Pieces.Piece">
+            <summary>
+            Abstract base class for other pieces, provides shared members and methods.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Pieces.Piece.Color">
+            <summary>
+            Determines the color of a given piece.
+            </summary>
+            <remarks>
+            See <see cref="T:Chess.Application.Enums.PieceColor"/>
+            </remarks>
+        </member>
+        <member name="P:Chess.Application.Pieces.Piece.UnicodeValue">
+            <summary>
+            Provides a unicode character that should correspond visually with the piece and color it represents.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Pieces.Piece.Square">
+            <summary>
+            Provides an index of the row on which the piece is located.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Pieces.Piece.Board">
+            <summary>
+            Provides a reference to the <see cref="T:Chess.Application.Boards.IBoard"/> instance that represents the chessboard.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Pieces.Piece.HasMoved">
+            <summary>
+            Provides a check whether the piece has moved - important for several pieces.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Pieces.Piece.PossibleMoves">
+            <summary>
+            Abstract method, override should calculate all possible moves for a given piece.
+            </summary>
+            <returns>A list of all possible moves as <see cref="P:Chess.Application.Pieces.Piece.Square"/>.</returns>
+        </member>
+        <member name="M:Chess.Application.Pieces.Piece.GetPossibleMoves">
+            <summary>
+            Abstract method, override should calculate all possible moves for a given piece.
+            </summary>
+            <returns>A list of all possible moves as <see cref="P:Chess.Application.Pieces.Piece.Square"/>.</returns>
+        </member>
+        <member name="M:Chess.Application.Pieces.Piece.IsThreateningSquare(Chess.Application.Boards.Square)">
+            <summary>
+            Checks whether the piece is attacking a given square to put restraints on king and other piece movements.
+            </summary>
+            <param name="otherSquare"></param>
+            <returns>True if the piece is attacking a given square, otherwise false.</returns>
+        </member>
+        <member name="M:Chess.Application.Pieces.Piece.CanMoveToSquare(Chess.Application.Boards.Square,Chess.Application.Enums.CaptureMode)">
+            <summary>
+            Checks if the piece can move to <paramref name="square"/> and adds the square to <see cref="P:Chess.Application.Pieces.Piece.PossibleMoves"/>.
+            </summary>
+            <param name="square"></param>
+            <param name="captureMode"></param>
+            <returns>True if the square is empty and piece can continue further in the direction.</returns>
+        </member>
+        <member name="M:Chess.Application.Pieces.Piece.CheckCanMoveToSquare(Chess.Application.Boards.Square,Chess.Application.Enums.CaptureMode)">
+            <summary>
+            Checks if the piece can move to <paramref name="square"/> - if it is unoccupied, or occupied by a correct piece depending on the context.
+            </summary>
+            <param name="square"></param>
+            <param name="captureMode"></param>
+            <returns>True if the piece can move to the given square.</returns>
+        </member>
+        <member name="M:Chess.Application.Pieces.Piece.RemoveInvalidMoves">
+            <summary>
+            Removes invalid moves from the list of available moves based on whether own king would remain safe for each given move.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Pieces.Piece.Move(Chess.Application.Boards.Square)">
+            <summary>
+            Handles the internals of moving the piece from the viewpoint of the piece - changing it's row and column
+            and setting its <see cref="P:Chess.Application.Pieces.Piece.HasMoved"/> property to true.
+            </summary>
+            <param name="square"></param>
+        </member>
+        <member name="M:Chess.Application.Pieces.Piece.ToString">
+            <summary>
+            Converts the piece to its unicode representation as string.
+            </summary>
+            <returns>Unicode representation of the piece as string.</returns>
+        </member>
+        <member name="M:Chess.Application.Pieces.Piece.ResetHasMoved">
+            <summary>
+            Sets <see cref="P:Chess.Application.Pieces.Piece.HasMoved"/> to false.
+            </summary>
+        </member>
+        <member name="T:Chess.Application.Pieces.Queen">
+            <summary>
+            Class that represents the Queen piece on the chessboard.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Pieces.Queen.#ctor(Chess.Application.Enums.PieceColor,Chess.Application.Boards.Square,Chess.Application.Boards.IBoard)">
+            <summary>
+            Creates an instance of the Queen class.
+            </summary>
+            <param name="color"></param>
+            <param name="square"></param>
+            <param name="board"></param>
+        </member>
+        <member name="M:Chess.Application.Pieces.Queen.GetPossibleMoves">
+            <summary>
+            Override method, calculates all possible moves for a given piece.
+            </summary>
+            <returns>A list of all possible moves as <see cref="T:Chess.Application.Boards.Square"/>.</returns>
+        </member>
+        <member name="M:Chess.Application.Pieces.Queen.IsThreateningSquare(Chess.Application.Boards.Square)">
+            <summary>
+            Checks whether the piece is attacking a given square to put restraints on king and other piece movements.
+            </summary>
+            <param name="otherSquare"></param>
+            <returns>True if the piece is attacking a given square, otherwise false.</returns>
+        </member>
+        <member name="T:Chess.Application.Pieces.Rook">
+            <summary>
+            Class that represents the Rook piece on the chessboard. Provides movement typical for Rooks.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Pieces.Rook.#ctor(Chess.Application.Enums.PieceColor,Chess.Application.Boards.Square,Chess.Application.Boards.IBoard)">
+            <summary>
+            Creates an instance of the Rook class.
+            </summary>
+            <param name="color"></param>
+            <param name="square"></param>
+            <param name="board"></param>
+        </member>
+        <member name="M:Chess.Application.Pieces.Rook.GetPossibleMoves">
+            <summary>
+            Override method, calculates all possible moves for a given piece.
+            </summary>
+            <returns>A list of all possible moves as <see cref="T:Chess.Application.Boards.Square"/>.</returns>
+        </member>
+        <member name="M:Chess.Application.Pieces.Rook.RookPossibleMoves(Chess.Application.Pieces.Piece)">
+            <summary>
+            Static method that calculates all moves a rook can make if put into the position of the piece given as an argument.
+            Calculates the moves for Rook and Queen.
+            </summary>
+            <param name="piece"></param>
+            <returns>A list of all possible moves as <see cref="T:Chess.Application.Boards.Square"/>.</returns>
+        </member>
+        <member name="M:Chess.Application.Pieces.Rook.IsThreateningSquare(Chess.Application.Boards.Square)">
+            <summary>
+            Checks whether the piece is attacking a given square to put restraints on king and other piece movements.
+            </summary>
+            <param name="otherSquare"> </param>
+            <returns>True if the piece is attacking a given square, otherwise false.</returns>
+        </member>
+        <member name="M:Chess.Application.Pieces.Rook.IsThreateningSquare(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square)">
+            <summary>
+            Checks whether the piece is attacking a given square to put restraints on king and other piece movements.
+            </summary>
+            <param name="piece"></param>
+            <param name="otherSquare"></param>
+            <returns>True if the piece is attacking a given square, otherwise false.</returns>
+        </member>
+        <member name="T:Chess.Application.Records.IMoveRecordExporter">
+            <summary>
+            Specifies methods for objects used to export moves made during the game.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Records.IMoveRecordExporter.Add(Chess.Application.Records.MoveRecord)">
+            <summary>
+            Adds <paramref name="move"/> to the collection.
+            </summary>
+            <param name="move"></param>
+        </member>
+        <member name="M:Chess.Application.Records.IMoveRecordExporter.Export">
+            <summary>
+            Exports moves in the collection.
+            </summary>
+        </member>
+        <member name="T:Chess.Application.Records.MoveRecord">
+            <summary>
+            Struct used to capture data about each move made in a give game.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Records.MoveRecord.Piece">
+            <summary>
+            The piece taking this move.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Records.MoveRecord.StartRow">
+            <summary>
+            The starting row of the piece.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Records.MoveRecord.StartColumn">
+            <summary>
+            The starting column of the piece.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Records.MoveRecord.StartPoint">
+            <summary>
+            Represents the starting coordinates of the move.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Records.MoveRecord.EndPoint">
+            <summary>
+            Represents the end coordinates of the move.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Records.MoveRecord.Row">
+            <summary>
+            The end row of the piece.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Records.MoveRecord.Column">
+            <summary>
+            The end column of the piece.
+            </summary>
+        </member>
+        <member name="P:Chess.Application.Records.MoveRecord.Type">
+            <summary>
+            The <see cref="T:Chess.Application.Enums.MoveType"/> enum that contains information about events during the piece's move.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Records.MoveRecord.#ctor(Chess.Application.Pieces.Piece,System.Int32,System.Int32,System.Int32,System.Int32,Chess.Application.Enums.MoveType)">
+            <summary>
+            Creates an instance of the Move struct.
+            </summary>
+            <param name="piece"></param>
+            <param name="startRow"></param>
+            <param name="startColumn"></param>
+            <param name="moveRow"></param>
+            <param name="moveColumn"></param>
+            <param name="moveType"></param>
+        </member>
+        <member name="M:Chess.Application.Records.MoveRecord.#ctor(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square,Chess.Application.Boards.Square,Chess.Application.Enums.MoveType)">
+            <summary>
+            Creates an instance of the Move struct.
+            </summary>
+            <param name="piece"></param>
+            <param name="startPoint"></param>
+            <param name="endPoint"></param>
+            <param name="moveType"></param>
+        </member>
+        <member name="T:Chess.Application.Records.MoveRecordExporter">
+            <summary>
+            Provides a means of collecting data about all moves made in a given game,
+            optionally may export this into a text file formatted as standard notation.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Records.MoveRecordExporter.#ctor">
+            <summary>
+            Creates an instance of <see cref="T:Chess.Application.Records.MoveRecordExporter"/>
+            </summary>
+        </member>
+        <member name="M:Chess.Application.Records.MoveRecordExporter.Add(Chess.Application.Records.MoveRecord)">
+            <summary>
+            Add Move struct to a collection of moves.
+            </summary>
+            <remarks>
+            See <see cref="T:Chess.Application.Records.MoveRecord"/>
+            </remarks>
+            <param name="move"></param>
+        </member>
+        <member name="M:Chess.Application.Records.MoveRecordExporter.Export">
+            <summary>
+            Iterates through collection of moves, translates it to standard notation,
+            and appends it to a text file "moves.txt".
+            </summary>
+        </member>
+    </members>
+</doc>
