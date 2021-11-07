@@ -12,14 +12,14 @@ namespace Chess.Application.Records
     /// </summary>
     public class MoveRecordExporter : IMoveRecordExporter
     {
-        private List<MoveRecord> PMoves { get; set; }
+        private List<MoveRecord> Moves { get; set; }
 
         /// <summary>
         /// Creates an instance of <see cref="MoveRecordExporter"/>
         /// </summary>
         public MoveRecordExporter()
         {
-            PMoves = new();
+            Moves = new();
         }
 
         /// <summary>
@@ -29,10 +29,7 @@ namespace Chess.Application.Records
         /// See <see cref="MoveRecord"/>
         /// </remarks>
         /// <param name="move"></param>
-        public void Add(MoveRecord move)
-        {
-            PMoves.Add(move);
-        }
+        public void Add(MoveRecord move) => Moves.Add(move);
 
         /// <summary>
         /// Iterates through collection of moves, translates it to standard notation,
@@ -40,44 +37,45 @@ namespace Chess.Application.Records
         /// </summary>
         public void Export()
         {
-            int n = 0;
+            // TODO proper refactoring
+            int currentMove = 0;
             int moveNo = 1;
 
             using StreamWriter file = new("moves.txt", true);
 
             file.WriteLine($"{DateTime.Now}");
 
-            while (n < PMoves.Count)
+            while (currentMove < Moves.Count)
             {
                 file.Write($"{moveNo}.");
 
-                for (int x = 0; x < 2; x++)
+                for (int whiteOrBlack = 0; whiteOrBlack < 2; whiteOrBlack++)
                 {
-                    if (n + x >= PMoves.Count)
+                    if (currentMove + whiteOrBlack >= Moves.Count)
                         continue;
 
                     file.Write(" ");
 
-                    MoveRecord move = PMoves[n + x];
+                    MoveRecord move = Moves[currentMove + whiteOrBlack];
 
-                    if ((move.Type | MoveType.KingsideCastling) == move.Type)
+                    if (IsMoveType(move, MoveType.KingsideCastling))
                     {
                         file.Write("0-0");
                         continue;
                     }
-                    else if ((move.Type | MoveType.QueensideCastling) == move.Type)
+                    else if (IsMoveType(move, MoveType.QueensideCastling))
                     {
                         file.Write("0-0-0");
                         continue;
                     }
-                    else if (!move.Piece.GetType().Equals(typeof(Pawn)) && (move.Type | MoveType.PawnPromotion) != move.Type)
+                    else if (!IsTypeOfPiece<Pawn>(move) && IsMoveType(move, MoveType.PawnPromotion))
                     {
                         file.Write($"{move.Piece.GetType().Name[0]}");
                     }
 
-                    if ((move.Type | MoveType.Capture) == move.Type)
+                    if (IsMoveType(move, MoveType.Capture))
                     {
-                        if (move.Piece.GetType().Equals(typeof(Pawn)) || (move.Type | MoveType.PawnPromotion) == move.Type)
+                        if (IsTypeOfPiece<Pawn>(move) || IsMoveType(move, MoveType.PawnPromotion))
                         {
                             file.Write($"{(char)('a' + move.StartColumn)}");
                         }
@@ -86,23 +84,33 @@ namespace Chess.Application.Records
 
                     file.Write($"{(char)('a' + move.Column)}{8 - move.Row}");
 
-                    if ((move.Type | MoveType.PawnPromotion) == move.Type)
+                    if (IsMoveType(move, MoveType.PawnPromotion))
                         file.Write($"{move.Piece.GetType().Name[0]}");
 
-                    if ((move.Type | MoveType.EnPassantCapture) == move.Type)
+                    if (IsMoveType(move, MoveType.EnPassantCapture))
                         file.Write(" e.p.");
 
-                    if ((move.Type | MoveType.Check) == move.Type)
+                    if (IsMoveType(move, MoveType.Check))
                         file.Write("+");
 
-                    if ((move.Type | MoveType.CheckMate) == move.Type)
+                    if (IsMoveType(move, MoveType.CheckMate))
                         file.Write("#");
                 }
                 file.WriteLine("");
                 moveNo += 1;
-                n += 2;
+                currentMove += 2;
             }
             file.WriteLine("");
+        }
+
+        private static bool IsTypeOfPiece<T>(MoveRecord move)
+        {
+            return move.Piece.GetType().Equals(typeof(T));
+        }
+
+        private static bool IsMoveType(MoveRecord move, MoveType moveType)
+        {
+            return (move.Type | moveType) == move.Type;
         }
     }
 }

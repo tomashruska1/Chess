@@ -976,137 +976,17 @@
             Sets up a board with a non-standard piece layout, e.g. a specific positions. Copies the given <see cref="T:Chess.Application.Boards.IBoard"/> instance's piece positions.
             </summary>
         </member>
-        <member name="T:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal">
-            <summary>
-            Extends the <see cref="T:Chess.Application.Boards.Board"/> with the ability to reverse a given move.
-            </summary>
-        </member>
-        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.#ctor(Chess.Application.BoardControllers.IPawnPromoter)">
-            <summary>
-            Creates an instance of <see cref="T:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal"/> class.
-            </summary>
-            <param name="pawnPromoter"></param>
-        </member>
-        <member name="P:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.MovesStack">
-            <summary>
-            Stores recent moves in a stack, each moves is added on top of the stack,
-            with each reversal the topmost one is removed and stored in the <see cref="P:Chess.Application.Boards.Board.RecentMoves"/>.
-            </summary>
-        </member>
-        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.MovePiece(Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
-            <summary>
-            Moves the piece on the board, removes the piece of opposing color if it is on the square.
-            </summary>
-            <param name="fromSquare"></param>
-            <param name="toSquare"></param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.MovePiece(Chess.Application.Boards.Square,Chess.Application.Boards.Square,System.Action{Chess.Application.Boards.Square,Chess.Application.Boards.Square})">
-            <summary>
-            Moves the piece on the board, removes the piece of opposing color if it is on the square.
-            </summary>
-            <param name="fromSquare"></param>
-            <param name="toSquare"></param>
-            <param name="moveSpecial"></param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.MovePiece(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square)">
-            <summary>
-            Moves the piece on the board, removes the piece of opposing color if it is on the square.
-            </summary>
-            <param name="piece"></param>
-            <param name="square"></param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.MovePiece(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square,System.Action{Chess.Application.Boards.Square,Chess.Application.Boards.Square})">
-            <summary>
-            Moves the piece on the board, removes the piece of opposing color if it is on the square. Calls the <paramref name="moveSpecial"/> delegate.
-            </summary>
-            <param name="piece"></param>
-            <param name="square"></param>
-            <param name="moveSpecial"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.GetBackup(Chess.Application.Boards.MoveData)">
-            <summary>
-            Returns piece that will be captured during the current move.
-            </summary>
-            <param name="move"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.IsPawnDoingEnPassantCapture(Chess.Application.Boards.MoveData)">
-            <summary>
-            Checks if the current piece is a <see cref="T:Chess.Application.Pieces.Pawn"/> and is doing an en passant capture.
-            </summary>
-            <param name="move"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.ReverseLastMove">
-            <summary>
-            Reverses the most recent move.
-            </summary>
-        </member>
-        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.ReversePawnPromotion(Chess.Application.Boards.MoveData,Chess.Application.Pieces.Piece)">
-            <summary>
-            Reverses pawn promotion - removes promoted piece, reinstates pawn.
-            Throws <see cref="T:System.InvalidOperationException"/> if <paramref name="piece"/> is not <see cref="T:Chess.Application.Pieces.Pawn"/>.
-            </summary>
-            <param name="moveData"></param>
-            <param name="piece"></param>
-            <exception cref="T:System.InvalidOperationException"></exception>
-        </member>
-        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.ReverseCastling(Chess.Application.Boards.Square)">
-            <summary>
-            Moves appropriate rook back to its original square when reversing a castling move.
-            </summary>
-            <param name="toSquare"></param>
-        </member>
-        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.IsCastlingKing(Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
-            <summary>
-            Checks if the current piece is a <see cref="T:Chess.Application.Pieces.King"/> and is castling.
-            </summary>
-            <param name="fromSquare"></param>
-            <param name="toSquare"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.SetUpNonstandardBoard(Chess.Application.Boards.IBoard)">
-            <summary>
-            Mirrors a given <see cref="T:Chess.Application.Boards.IBoard"/> piece positions.
-            </summary>
-            <param name="board"></param>
-        </member>
-        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.InjectPiece(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square)">
-            <summary>
-            Adds a piece of the same type as <paramref name="piece"/> to the given square.
-            </summary>
-            <param name="piece"></param>
-            <param name="square"></param>
-        </member>
-        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.ThrowIfKingIsAlreadyAssigned(Chess.Application.Pieces.Piece)">
-            <summary>
-            Makes sure that no more than one <see cref="T:Chess.Application.Pieces.King"/> is present on the chessboard.
-            </summary>
-            <param name="piece"></param>
-        </member>
-        <member name="M:Chess.Application.ChessAIs.Extensions.BoardWithMoveReversal.GetPiece(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square)">
-            <summary>
-            Returns a new instance of the same class as the given <paramref name="piece"/>.
-            </summary>
-            <param name="piece"></param>
-            <param name="square"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Chess.Application.ChessAIs.Extensions.IBoardWithMoveReversal">
+        <member name="T:Chess.Application.ChessAIs.Extensions.IReversalEnabledBoard">
             <summary>
             Extends the <see cref="T:Chess.Application.Boards.IBoard"/> with the ability to reverse a given move.
             </summary>
         </member>
-        <member name="M:Chess.Application.ChessAIs.Extensions.IBoardWithMoveReversal.ReverseLastMove">
+        <member name="M:Chess.Application.ChessAIs.Extensions.IReversalEnabledBoard.ReverseLastMove">
             <summary>
             Reverses the most recent move.
             </summary>
         </member>
-        <member name="M:Chess.Application.ChessAIs.Extensions.IBoardWithMoveReversal.SetUpNonstandardBoard(Chess.Application.Boards.IBoard)">
+        <member name="M:Chess.Application.ChessAIs.Extensions.IReversalEnabledBoard.SetUpNonstandardBoard(Chess.Application.Boards.IBoard)">
             <summary>
             Mirrors a given <see cref="T:Chess.Application.Boards.IBoard"/> piece positions.
             </summary>
@@ -1140,6 +1020,126 @@
             <param name="fromSquare"></param>
             <param name="whichSquare"></param>
             <returns>True if the piece would be attacking a given square, otherwise false.</returns>
+        </member>
+        <member name="T:Chess.Application.ChessAIs.Extensions.ReversalEnabledBoard">
+            <summary>
+            Extends the <see cref="T:Chess.Application.Boards.Board"/> with the ability to reverse a given move.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.ReversalEnabledBoard.#ctor(Chess.Application.BoardControllers.IPawnPromoter)">
+            <summary>
+            Creates an instance of <see cref="T:Chess.Application.ChessAIs.Extensions.ReversalEnabledBoard"/> class.
+            </summary>
+            <param name="pawnPromoter"></param>
+        </member>
+        <member name="P:Chess.Application.ChessAIs.Extensions.ReversalEnabledBoard.MovesStack">
+            <summary>
+            Stores recent moves in a stack, each moves is added on top of the stack,
+            with each reversal the topmost one is removed and stored in the <see cref="P:Chess.Application.Boards.Board.RecentMoves"/>.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.ReversalEnabledBoard.MovePiece(Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
+            <summary>
+            Moves the piece on the board, removes the piece of opposing color if it is on the square.
+            </summary>
+            <param name="fromSquare"></param>
+            <param name="toSquare"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.ReversalEnabledBoard.MovePiece(Chess.Application.Boards.Square,Chess.Application.Boards.Square,System.Action{Chess.Application.Boards.Square,Chess.Application.Boards.Square})">
+            <summary>
+            Moves the piece on the board, removes the piece of opposing color if it is on the square.
+            </summary>
+            <param name="fromSquare"></param>
+            <param name="toSquare"></param>
+            <param name="moveSpecial"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.ReversalEnabledBoard.MovePiece(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square)">
+            <summary>
+            Moves the piece on the board, removes the piece of opposing color if it is on the square.
+            </summary>
+            <param name="piece"></param>
+            <param name="square"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.ReversalEnabledBoard.MovePiece(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square,System.Action{Chess.Application.Boards.Square,Chess.Application.Boards.Square})">
+            <summary>
+            Moves the piece on the board, removes the piece of opposing color if it is on the square. Calls the <paramref name="moveSpecial"/> delegate.
+            </summary>
+            <param name="piece"></param>
+            <param name="square"></param>
+            <param name="moveSpecial"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.ReversalEnabledBoard.GetBackup(Chess.Application.Boards.MoveData)">
+            <summary>
+            Returns piece that will be captured during the current move.
+            </summary>
+            <param name="move"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.ReversalEnabledBoard.IsPawnDoingEnPassantCapture(Chess.Application.Boards.MoveData)">
+            <summary>
+            Checks if the current piece is a <see cref="T:Chess.Application.Pieces.Pawn"/> and is doing an en passant capture.
+            </summary>
+            <param name="move"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.ReversalEnabledBoard.ReverseLastMove">
+            <summary>
+            Reverses the most recent move.
+            </summary>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.ReversalEnabledBoard.ReversePawnPromotion(Chess.Application.Boards.MoveData,Chess.Application.Pieces.Piece)">
+            <summary>
+            Reverses pawn promotion - removes promoted piece, reinstates pawn.
+            Throws <see cref="T:System.InvalidOperationException"/> if <paramref name="piece"/> is not <see cref="T:Chess.Application.Pieces.Pawn"/>.
+            </summary>
+            <param name="moveData"></param>
+            <param name="piece"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.ReversalEnabledBoard.ReverseCastling(Chess.Application.Boards.Square)">
+            <summary>
+            Moves appropriate rook back to its original square when reversing a castling move.
+            </summary>
+            <param name="toSquare"></param>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.ReversalEnabledBoard.IsCastlingKing(Chess.Application.Boards.Square,Chess.Application.Boards.Square)">
+            <summary>
+            Checks if the current piece is a <see cref="T:Chess.Application.Pieces.King"/> and is castling.
+            </summary>
+            <param name="fromSquare"></param>
+            <param name="toSquare"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.ReversalEnabledBoard.SetUpNonstandardBoard(Chess.Application.Boards.IBoard)">
+            <summary>
+            Mirrors a given <see cref="T:Chess.Application.Boards.IBoard"/> piece positions.
+            </summary>
+            <param name="board"></param>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.ReversalEnabledBoard.InjectPiece(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square)">
+            <summary>
+            Adds a piece of the same type as <paramref name="piece"/> to the given square.
+            </summary>
+            <param name="piece"></param>
+            <param name="square"></param>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.ReversalEnabledBoard.ThrowIfKingIsAlreadyAssigned(Chess.Application.Pieces.Piece)">
+            <summary>
+            Makes sure that no more than one <see cref="T:Chess.Application.Pieces.King"/> is present on the chessboard.
+            </summary>
+            <param name="piece"></param>
+        </member>
+        <member name="M:Chess.Application.ChessAIs.Extensions.ReversalEnabledBoard.GetPiece(Chess.Application.Pieces.Piece,Chess.Application.Boards.Square)">
+            <summary>
+            Returns a new instance of the same class as the given <paramref name="piece"/>.
+            </summary>
+            <param name="piece"></param>
+            <param name="square"></param>
+            <returns></returns>
         </member>
         <member name="T:Chess.Application.ChessAIs.Moves.MoveEvaluator">
             <summary>
