@@ -1,0 +1,10 @@
+﻿global using Chess.Application.Pieces;
+global using Chess.Application.Enums;
+global using Chess.Application.Records;
+global using Chess.Application.Boards;
+global using Chess.Application.ChessAIs;
+global using Chess.Application.BoardControllers;
+global using Chess.Application.ChessAIs.Extensions;
+global using Chess.Application.ChessAIs.Moves;
+global using Chess.Application.ChessAIs.Weights;
+global using System.Reflection;
